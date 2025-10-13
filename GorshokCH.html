@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Анонимное общение — Gorshok RPM</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #101820, #2e2e2e);
+      color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background: #1f1f1f;
+      text-align: center;
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+
+    header h1 {
+      color: #00ff99;
+      margin: 0;
+    }
+
+    #chat-box {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .message {
+      background: rgba(255,255,255,0.07);
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      max-width: 80%;
+      position: relative;
+      word-break: break-word;
+    }
+
+    .message.self {
+      align-self: flex-end;
+      background: rgba(0,255,153,0.15);
+    }
+
+    .message.admin {
+      border: 1px solid #00ff99;
+      background: rgba(0,255,153,0.25);
+    }
+
+    .message small {
+      display: block;
+      color: #aaa;
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      background: none;
+      border: none;
+      color: #ff5c5c;
+      cursor: pointer;
+      font-size: 1rem;
+      display: none;
+    }
+
+    .admin-mode .delete-btn {
+      display: inline;
+    }
+
+    footer {
+      background: #1a1a1a;
+      padding: 0.8rem;
+      display: flex;
+      gap: 0.6rem;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.4);
+    }
+
+    input {
+      flex: 1;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #00ff99;
+      color: #000;
+      border: none;
+      padding: 0.7rem 1.3rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #00cc7a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Анонимное общение</h1>
+    <p style="color:#ccc;margin-top:0.3rem;">Сообщения видят все пользователи</p>
+  </header>
+
+  <main id="chat-box"></main>
+
+  <footer>
+    <input type="text" id="messageInput" placeholder="Введите сообщение..." />
+    <button id="sendBtn">Отправить</button>
+  </footer>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBOoUI-BhgrirrK4yOQyJUlXrM6EikyRY0",
+      authDomain: "gorshokrpm.firebaseapp.com",
+      databaseURL: "https://gorshokrpm-default-rtdb.firebaseio.com",
+      projectId: "gorshokrpm",
+      storageBucket: "gorshokrpm.firebasestorage.app",
+      messagingSenderId: "948140804897",
+      appId: "1:948140804897:web:eabcb36f436e612cd88c60",
+      measurementId: "G-18MEHBMX1G"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const chatBox = document.getElementById("chat-box");
+    const input = document.getElementById("messageInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    // === Данные пользователя ===
+    let userId = localStorage.getItem("userId") || ("user-" + Math.random().toString(36).substring(2, 9));
+    localStorage.setItem("userId", userId);
+    let isAdmin = localStorage.getItem("isAdmin") === "true";
+    if (isAdmin) document.body.classList.add("admin-mode");
+
+    // === Антиспам ===
+    let lastMessageTime = 0;
+    const spamDelay = 3000; // 3 секунды
+
+    // === Отправка сообщений ===
+    sendBtn.addEventListener("click", sendMessage);
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+
+      const now = Date.now();
+      if (now - lastMessageTime < spamDelay) {
+        alert("Подожди 3 секунды перед следующим сообщением!");
+        return;
+      }
+      lastMessageTime = now;
+
+      // Команда входа в админ-режим
+      if (text === "/ADGorkell") {
+        isAdmin = true;
+        localStorage.setItem("isAdmin", "true");
+        document.body.classList.add("admin-mode");
+        alert("Режим администратора активирован!");
+        input.value = "";
+        return;
+      }
+
+      // Команда очистки чата (только для админа)
+      if (isAdmin && text === "/clear") {
+        if (confirm("Очистить весь чат?")) {
+          set(ref(db, "messages"), null);
+        }
+        input.value = "";
+        return;
+      }
+
+      // Обычное сообщение
+      push(ref(db, "messages"), {
+        text,
+        user: userId,
+        isAdmin,
+        time: Date.now()
+      });
+      input.value = "";
+    }
+
+    // === Получение и отображение сообщений ===
+    onValue(ref(db, "messages"), (snapshot) => {
+      chatBox.innerHTML = "";
+      const messages = snapshot.val();
+      if (!messages) return;
+
+      for (const id in messages) {
+        const msgData = messages[id];
+        const msg = document.createElement("div");
+        msg.classList.add("message");
+        if (msgData.user === userId) msg.classList.add("self");
+        if (msgData.isAdmin) msg.classList.add("admin");
+
+        const time = new Date(msgData.time).toLocaleTimeString();
+
+        msg.innerHTML = `
+          ${msgData.isAdmin ? "<b>[Admin]</b> " : ""}${msgData.text}
+          <small>${time}</small>
+          ${isAdmin ? '<button class="delete-btn" title="Удалить">🗑</button>' : ''}
+        `;
+
+        if (isAdmin) {
+          const btn = msg.querySelector(".delete-btn");
+          btn.onclick = () => remove(ref(db, "messages/" + id));
+        }
+
+        chatBox.appendChild(msg);
+      }
+
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+  </script>
+</body>
+</html>
