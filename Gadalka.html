@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gorshok RPM — Гадания за валюту</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top right, #160028, #050008);
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+      overflow-y: auto;
+    }
+
+    /* Мягкое мерцание свечей на фоне */
+    .candles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .candle {
+      position: absolute;
+      bottom: 0;
+      width: 10px;
+      height: 40px;
+      background: linear-gradient(to top, #ffcc77, #fff5d0);
+      border-radius: 5px;
+      animation: flicker 2s infinite;
+      box-shadow: 0 0 25px rgba(255, 180, 90, 0.8);
+    }
+
+    .flame {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 20px;
+      background: radial-gradient(circle, #ffcc77, #ff6600 60%);
+      border-radius: 50%;
+      animation: flame 1.3s infinite alternate;
+      box-shadow: 0 0 15px rgba(255, 170, 60, 0.8);
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 0.8; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.05); }
+    }
+
+    @keyframes flame {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+      50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 20px rgba(193, 133, 255, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      color: #c086ff;
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    .back-btn {
+      background: linear-gradient(90deg, #9a63ff, #c083ff);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.3rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.05);
+      opacity: 0.85;
+    }
+
+    .cart-btn {
+      background: #b36bff;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .cart-btn:hover {
+      background: #9a4aff;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(193, 133, 255, 0.3);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      position: relative;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: #b36bff;
+    }
+
+    nav a.active::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #c086ff;
+      border-radius: 3px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: #c086ff;
+      font-size: 1.8rem;
+      margin-top: 3rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7rem;
+      color: #ddd;
+      text-align: center;
+      white-space: pre-line;
+    }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #7b3eff, #b36bff, #ffd700);
+      border-radius: 15px;
+      text-align: center;
+      padding: 1.5rem;
+      box-shadow: 0 0 20px rgba(180, 100, 255, 0.4);
+      color: #000;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    .card p {
+      margin: 0.8rem 0;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .card button {
+      border: none;
+      background: #7b3eff;
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight: bold;
+    }
+
+    .card button:hover {
+      background: #9a63ff;
+    }
+
+    .fortune-box {
+      text-align: center;
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #c086ff;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 0 15px rgba(193, 133, 255, 0.3);
+    }
+
+    .fortune-text {
+      font-size: 1.3rem;
+      color: #fff8dc;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      margin-top: 3rem;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    footer a {
+      color: #c086ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(15, 0, 30, 0.96);
+      border: 2px solid #c086ff;
+      border-radius: 15px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 400px;
+      color: #fff;
+      box-shadow: 0 0 25px rgba(180, 100, 255, 0.4);
+      z-index: 1000;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    .contacts-info {
+      text-align: center;
+      margin-top: 1rem;
+      color: #ccc;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Анимированные свечи -->
+  <div class="candles">
+    <div class="candle" style="left:10%;"><div class="flame"></div></div>
+    <div class="candle" style="left:40%;"><div class="flame"></div></div>
+    <div class="candle" style="left:70%;"><div class="flame"></div></div>
+    <div class="candle" style="left:90%;"><div class="flame"></div></div>
+  </div>
+
+  <header>
+    <h1>Gorshok RPM</h1>
+    <div>
+      <button class="cart-btn" onclick="toggleCart()">🔮 Корзина (<span id='cartCount'>0</span>)</button>
+      <button class="back-btn" onclick="location.href='index.html'">Главная</button>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#" class="active" onclick="showSection('desc', this)">Описание</a>
+    <a href="#" onclick="showSection('price', this)">Гадания</a>
+    <a href="#" onclick="showSection('daily', this)">Гадание дня</a>
+    <a href="#" onclick="showSection('contacts', this)">Контакты</a>
+  </nav>
+
+  <main>
+    <section id="desc" class="active">
+      <h2>Гадания за валюту RPM</h2>
+      <p>Добро пожаловать в мистическую часть Gorshok Club.
+Здесь ты можешь использовать свою игровую валюту RPM, чтобы узнать тайны судьбы, получить знак свыше или заглянуть в грядущее.
+
+✨ Мы предлагаем разнообразные виды гаданий: от простых карт дня до глубоких раскладов, раскрывающих твой путь, душевное состояние и возможные события будущего.
+
+💀 Каждое гадание создаётся вручную и погружает в атмосферу мрака, мистики и предчувствия, помогая почувствовать тонкую связь с миром неизведанного.
+
+🔮 На нашем сайте ты можешь:
+
+Узнать своё состояние — тело, разум и душа.
+
+Посмотреть денежный поток и финансовые возможности.
+
+Получить советы судьбы или предупреждения, которые ты не замечаешь.
+
+Разобраться в любовных отношениях и увидеть возможные пути будущего.
+
+Открыть предназначение своей души и понять свои возможности.
+
+Погрузись в магию, выбери гадание и открой тайны, которые окружают тебя каждый день.</p>
+    </section>
+
+    <section id="price">
+      <h2>Выбери своё гадание</h2>
+      <div class="price-grid">
+  <div class="card">
+    <h3>Как вернуть гармонию - что забирает энергию и как восстановить силы</h3>
+    <p>💰 20 000$</p>
+    <button onclick="addToCart('Как вернуть гармонию что забирает энергию и как восстановить силы', '20 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Моё состояние сейчас - тело разум душа </h3>
+    <p>💰 15 000$</p>
+    <button onclick="addToCart('Моё состояние сейчас тело разум душа', '15 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Три варианта судьбы - как сложится если выбрать один из трёх путей</h3>
+    <p>💰 20 000$</p>
+    <button onclick="addToCart('Три варианта судьбы как сложится если выбрать один из трёх путей', '20 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Путь души - зачем ты пришла в этот мир</h3>
+    <p>💰 15 000$</p>
+    <button onclick="addToCart('Путь души зачем ты пришла в этот мир', '15 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Письмо любви - 7 карт каждая строчка письма от любимого</h3>
+    <p>💰 20 000$</p>
+    <button onclick="addToCart('Письмо любви 7 карт каждая строчка письма от любимого', '20 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Любит или нет - одна карта или три для ответа</h3>
+    <p>💰 15 000$</p>
+    <button onclick="addToCart('Любит или нет одна карта или три для ответа', '15 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Чего я не вижу - тайное предупреждение</h3>
+    <p>💰 20 000$</p>
+    <button onclick="addToCart('Чего я не вижу тайное предупреждение', '20 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Совет судьбы - одна карта с подсказкой</h3>
+    <p>💰 20 000$</p>
+    <button onclick="addToCart('Совет судьбы одна карта с подсказкой', '20 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Карта дня  - что день принесёт</h3>
+    <p>💰 15 000$</p>
+    <button onclick="addToCart('Карта дня что день принесёт', '15 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Путь души - кто ты по предназначению</h3>
+    <p>💰 25 000$</p>
+    <button onclick="addToCart('Путь души кто ты по предназначению', '25 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Денежный поток - где потери где прибыль</h3>
+    <p>💰 20 000$</p>
+    <button onclick="addToCart('Денежный поток где потери где прибыль', '20 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Будущее пары - есть ли у отношений шанс</h3>
+    <p>💰 15 000$</p>
+    <button onclick="addToCart('Будущее пары есть ли у отношений шанс', '15 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Что ждёт в любви - появится ли кто-то новый</h3>
+    <p>💰 25 000$</p>
+    <button onclick="addToCart('Что ждёт в любви появится ли кто-то новый', '25 000$')">Выбрать</button>
+  </div>
+
+  <div class="card">
+    <h3>Путь души - кто ты по предназначению</h3>
+    <p>💰 20 000$</p>
+    <button onclick="addToCart('Путь души кто ты по предназначению', '20 000$')">Выбрать</button>
+        </div>
+<div class="card">
+  <h3>Внутренний потенциал что мешает раскрыться и как открыть свои возможности</h3>
+  <p>💰 20 000$</p>
+  <button onclick="addToCart('Внутренний потенциал что мешает раскрыться и как открыть свои возможности', '20 000$')">Выбрать</button>
+</div>
+
+      </div>
+    </section>
+
+    <section id="daily">
+      <h2>Гадание дня</h2>
+      <div class="fortune-box">
+        <p>Нажми, чтобы узнать, что ждёт тебя сегодня...</p>
+        <button class="back-btn" onclick="showFortune()">🔮 Получить предсказание</button>
+        <div class="fortune-text" id="fortuneText"></div>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <h2>Контакты</h2>
+      <div class="contacts-info">
+        ✉️ Telegram: <b>@Gorkell</b><br>
+        💬 Discord: <b>mamkis</b><br><br>
+        Сделайте скрин заказа и отправьте его — гадание придёт в течение 12 часов.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    🔮 <span style="color:#c086ff;">Каждое предсказание уникально и создаётся вручную.</span>
+    <br><br><a href="contacts.html">Связаться</a>
+  </footer>
+
+  <div class="cart-modal" id="cartModal">
+    <h3>Корзина</h3>
+    <div class="cart-items" id="cartItems"></div>
+    <label>Ник:</label>
+    <input type="text" id="nick" placeholder="Введите ваш ник">
+    <label>Имя в игре:</label>
+    <input type="text" id="gameName" placeholder="Введите имя в игре">
+    <div class="contacts-info">
+      @Gorkell — Telegram<br>
+      mamkis — Discord<br><br>
+      Сделайте скриншот заказа и отправьте по этим контактам.
+    </div>
+    <button class="close-cart" onclick="toggleCart()">Закрыть</button>
+  </div>
+
+  <script>
+    function showSection(id, el) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function updateCart() {
+      document.getElementById('cartCount').textContent = cart.length;
+      let itemsHTML = '';
+      if (cart.length === 0) {
+        itemsHTML = '<p>Корзина пуста</p>';
+      } else {
+        cart.forEach((item, index) => {
+          itemsHTML += `
+            <div class="cart-item">
+              <span>${item.name} — ${item.price}</span>
+              <button class="remove-btn" onclick="removeFromCart(${index})">🗑️</button>
+            </div>`;
+        });
+      }
+      document.getElementById('cartItems').innerHTML = itemsHTML;
+    }
+
+    function toggleCart() {
+      const modal = document.getElementById('cartModal');
+      modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+    }
+
+    const fortunes = [
+      "Сегодня удача заглянет к тебе — не прогони её.",
+      "Пламя свечи зовёт перемены. Готов ли ты?",
+      "Не доверяй первым мыслям — истина во втором взгляде.",
+      "Скоро ты услышишь то, чего ждал очень давно.",
+      "Тьма улыбается тебе... но это не всегда плохо.",
+      "Судьба готовит подарок. Но он может быть с зубами.",
+      "Кто-то вспомнит о тебе — и это изменит многое.",
+      "Не ищи ответы сегодня. Пусть они сами найдут тебя.",
+      "Обернись. Иногда прошлое ещё идёт за тобой.",
+      "Ты ближе к своей цели, чем думаешь. Остался один шаг."
+    ];
+
+    function showFortune() {
+      const fortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+      document.getElementById('fortuneText').textContent = fortune;
+    }
+  </script>
+</body>
+</html>
