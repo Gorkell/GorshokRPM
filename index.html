@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPM Skins — магазин скинов</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #101820, #2e2e2e);
+      color: #f5f5f5;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      background: #1f1f1f;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      position: relative;
+    }
+
+    header h1 {
+      color: #00ff99;
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-top: 0.3rem;
+    }
+
+    /* === Кнопка "Сайты наших клиентов" === */
+    .client-sites-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #00ff99;
+      color: #000;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .client-sites-btn:hover {
+      background: #00cc7a;
+    }
+
+    /* === Стили модального окна === */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #1e1e1e;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      min-width: 250px;
+      max-width: 300px;
+    }
+
+    .modal-content h3 {
+      color: #00ff99;
+      margin-bottom: 1rem;
+    }
+
+    .modal-content a {
+      display: block;
+      background: rgba(255,255,255,0.1);
+      color: #00ff99;
+      text-decoration: none;
+      padding: 0.6rem;
+      margin: 0.5rem 0;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    .modal-content a:hover {
+      background: rgba(0,255,153,0.2);
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 1.2rem;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .close-btn:hover {
+      color: #fff;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      color: #00ff99;
+      text-align: center;
+    }
+
+    .price-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .price-list li {
+      background: rgba(255, 255, 255, 0.07);
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 10px;
+      transition: 0.2s ease;
+    }
+
+    .price-list li:hover {
+      background: rgba(0, 255, 153, 0.1);
+    }
+
+    .price-title {
+      font-size: 1.2rem;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .price-value {
+      color: #00ff99;
+      float: right;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1rem;
+      background: #1a1a1a;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    footer span {
+      color: #00ff99;
+    }
+
+    .button {
+      display: block;
+      width: fit-content;
+      margin: 1rem auto;
+      background: #00ff99;
+      color: #000;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .button:hover {
+      background: #00cc7a;
+    }
+
+    .contact-link {
+      color: #00ff99;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Gorshok Skins</h1>
+    <p>Продажа и улучшение Minecraft-скинов за игровую валюту сервера RPM</p>
+
+    <!-- Кнопка открытия списка сайтов -->
+    <button class="client-sites-btn" id="openModal">Сайты наших клиентов</button>
+  </header>
+
+  <!-- Модальное окно -->
+  <div class="modal" id="clientModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeModal">&times;</button>
+      <h3>Сайты клиентов</h3>
+
+      <!-- Здесь можно добавлять новые сайты ↓ -->
+      <a href="VIP.html" target="_blank">VIP Сайт</a>
+      <!-- Пример: <a href="example.html" target="_blank">Название сайта</a> -->
+      <!-- Пример: <a href="client2.html" target="_blank">Client 2</a> -->
+      <!-- ↑ Просто копируй и меняй ссылки -->
+    </div>
+  </div>
+
+  <main>
+    <h2>Прайс-лист</h2>
+    <ul class="price-list">
+      <li>
+        <span class="price-title">Улучшить ваш скин</span>
+        <span class="price-value">50 000</span>
+      </li>
+      <li>
+        <span class="price-title">Поменять одежду (оставить лицо)</span>
+        <span class="price-value">от 100 000+</span>
+        <p style="color:#bbb; margin-top:0.3rem;">*Зависит от сложности</p>
+      </li>
+      <li>
+        <span class="price-title">Полностью новый скин</span>
+        <span class="price-value">200 000+</span>
+      </li>
+    </ul>
+
+    <a href="contacts.html" class="button">Заказать скин</a>
+  </main>
+
+  <footer>
+    За отдельную плату, вы можете <span>арендовать страницу на нашем сайте!</span><br><br>
+    <a href="contacts.html" class="contact-link">Контакты</a>
+  </footer>
+
+  <script>
+    const openModal = document.getElementById('openModal');
+    const closeModal = document.getElementById('closeModal');
+    const modal = document.getElementById('clientModal');
+
+    openModal.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) modal.style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>

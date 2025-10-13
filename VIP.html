@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gorshok Club — RP сценарии</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #1b0028, #090014);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      color: #ff4fd8;
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    .back-btn {
+      background: linear-gradient(90deg, #ff0099, #ff6aff);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.3rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+
+    /* Кнопка корзины */
+    .cart-btn {
+      background: #ff00c8;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .cart-btn:hover {
+      background: #e600b4;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(255, 0, 255, 0.2);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      position: relative;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: #ff77ff;
+    }
+
+    nav a.active::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #ff4fd8;
+      border-radius: 3px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff4fd8;
+      font-size: 1.8rem;
+      margin-top: 3rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7rem;
+      color: #ddd;
+      text-align: center;
+      white-space: pre-line;
+    }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #ff00c8, #ff9900, #00e1ff);
+      border-radius: 15px;
+      text-align: center;
+      padding: 1.5rem;
+      box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+      color: #000;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .card p {
+      margin: 0.8rem 0;
+      color: #000;
+    }
+
+    .card button {
+      border: none;
+      background: #ff00c8;
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight: bold;
+    }
+
+    .card button:hover {
+      background: #e600b4;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      margin-top: 3rem;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    footer a {
+      color: #ff4fd8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    /* Окно корзины */
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(20, 0, 30, 0.95);
+      border: 2px solid #ff4fd8;
+      border-radius: 15px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 400px;
+      color: #fff;
+      box-shadow: 0 0 25px rgba(255, 0, 255, 0.3);
+      z-index: 1000;
+    }
+
+    .cart-modal h3 {
+      text-align: center;
+      color: #ff4fd8;
+    }
+
+    .cart-items {
+      margin: 1rem 0;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .cart-item {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .remove-btn {
+      background: transparent;
+      border: none;
+      color: #ff4fd8;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: 0.2s;
+    }
+
+    .remove-btn:hover {
+      color: #ff99ff;
+    }
+
+    .close-cart {
+      display: block;
+      margin: 1rem auto;
+      background: #ff00c8;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .close-cart:hover {
+      background: #e600b4;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    .contacts-info {
+      text-align: center;
+      margin-top: 1rem;
+      color: #ccc;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Gorshok Club</h1>
+    <div>
+      <button class="cart-btn" onclick="toggleCart()">🛒 Корзина (<span id='cartCount'>0</span>)</button>
+      <button class="back-btn" onclick="location.href='index.html'">Вернуться к скинам</button>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#" class="active" onclick="showSection('desc', this)">Описание</a>
+    <a href="#" onclick="showSection('price', this)">Прайс</a>
+    <a href="#" onclick="showSection('contacts', this)">Контакты</a>
+  </nav>
+
+  <main>
+    <section id="desc" class="active">
+      <h2>Что на сайте</h2>
+      <p>Gorshok Club — цифровое пространство развлечений в RP мире. Мы предлагаем уникальные сценарии и приват-услуги, где каждый клиент получает исключительную заботу и полную конфиденциальность.
+ 🎭 Эксклюзивные RP-сценарии с возможностью кастомизации под ваши желания
+ 🧩 Приват-услуги, адаптированные под любые запросы и фантазии 
+
+🔒 Абсолютная анонимность и безопасность 
+⚡ Быстрая связь и поддержка через Discord и Telegram 
+⚠️ Важно: Мы являемся нелегальным RP-бизнесом, поэтому конфиденциальность — наш главный приоритет.</p>
+    </section>
+
+    <section id="price">
+      <h2>Прайс</h2>
+      <div class="price-grid">
+         <div class="card">
+          <h3>🫦 Минет</h3>
+          <p>25 000$</p>
+          <button onclick="addToCart('Минет', '25 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>👠 Фемдом (без секса)</h3>
+          <p>38 000$</p>
+          <button onclick="addToCart('Фемдом (без секса)', '38 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>👠 Фемдом (с сексом)</h3>
+          <p>60 000$</p>
+          <button onclick="addToCart('Фемдом (с сексом)', '60 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>🪢 Шибари</h3>
+          <p>20 000$</p>
+          <button onclick="addToCart('Шибари', '20 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>🦶 фут-Джоб</h3>
+          <p>от 20 000$</p>
+          <button onclick="addToCart('фут-Джоб', '20 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>🎀 Сисько-трах</h3>
+          <p>30 000$</p>
+          <button onclick="addToCart('Сисько-трах', '30 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>🫳 Дрочка руками</h3>
+          <p>20 000$</p>
+          <button onclick="addToCart('Дрочка руками', '20 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>💖 Вагинальный секс</h3>
+          <p>45 000$</p>
+          <button onclick="addToCart('Вагинальный секс<', '45 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>💖 Анальный секс</h3>
+          <p>45 000$</p>
+          <button onclick="addToCart('Анальный секс', '45 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>🫶 девушка на час (без интива)</h3>
+          <p>65 000$</p>
+          <button onclick="addToCart('девушка на час (без интива)', '65 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>🫶 девушка на час (с интимом, поцелуи, заигрывания)</h3>
+          <p>85 000$ </p>
+          <button onclick="addToCart('девушка на час (с интимом)', '85 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>🧍‍♀️🛏️🧍‍♂️ночь со всеми радостями (23:00 - 2:00)</h3>
+          <p>120 000$</p>
+          <button onclick="addToCart('ночь со всеми радостями', '120 000$')">Выбрать</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <h2>Контакты</h2>
+      <p><a href="contacts.html" style="color:#00e1ff; text-decoration:none;">Перейти к контактам</a></p>
+      <p>Набор работников всегда открыт! по заявкам писать туда же.</p>
+    </section>
+  </main>
+
+  <footer>
+    За отдельную плату, вы можете <span style="color:#ff4fd8;">арендовать страницу на нашем сайте!</span><br><br>
+    <a href="contacts.html">Контакты</a>
+  </footer>
+
+  <!-- Всплывающее окно корзины -->
+  <div class="cart-modal" id="cartModal">
+    <h3>Корзина</h3>
+    <div class="cart-items" id="cartItems"></div>
+
+    <label>Ник:</label>
+    <input type="text" id="nick" placeholder="Введите ваш ник">
+    <label>Имя в игре:</label>
+    <input type="text" id="gameName" placeholder="Введите имя в игре">
+
+    <div class="contacts-info">
+      @Gorkell — Telegram<br>
+      mamkis — Discord<br><br>
+      Сделайте скриншот заказа и отправьте по этим контактам.
+    </div>
+
+    <button class="close-cart" onclick="toggleCart()">Закрыть</button>
+  </div>
+
+  <script>
+    function showSection(id, el) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function updateCart() {
+      document.getElementById('cartCount').textContent = cart.length;
+      let itemsHTML = '';
+      if (cart.length === 0) {
+        itemsHTML = '<p>Корзина пуста</p>';
+      } else {
+        cart.forEach((item, index) => {
+          itemsHTML += `
+            <div class="cart-item">
+              <span>${item.name} — ${item.price}</span>
+              <button class="remove-btn" onclick="removeFromCart(${index})">🗑️</button>
+            </div>`;
+        });
+      }
+      document.getElementById('cartItems').innerHTML = itemsHTML;
+    }
+
+    function toggleCart() {
+      const modal = document.getElementById('cartModal');
+      modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+
+</body>
+</html>
