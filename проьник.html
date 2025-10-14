@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gorshok Skins — магазин скинов</title>
+  <style>
+    /* === Общие стили === */
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #101820, #2e2e2e);
+      background-size: 400% 400%;
+      animation: gradientShift 10s ease infinite;
+      color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      background: #1f1f1f;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    header h1 {
+      color: #00ff99;
+      font-size: 2.5rem;
+      margin: 0;
+      text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-top: 0.3rem;
+      padding: 0 1rem;
+    }
+
+    /* === Верхние кнопки === */
+    .client-sites-btn, .cart-btn {
+      position: absolute;
+      top: 1rem;
+      background: #00ff99;
+      color: #000;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 0 10px #00ff99;
+      font-size: 0.9rem;
+    }
+
+    .client-sites-btn { right: 1rem; }
+    .cart-btn { left: 1rem; }
+
+    .client-sites-btn:hover, .cart-btn:hover {
+      background: #00cc7a;
+      transform: scale(1.05);
+    }
+
+    /* === Навигация === */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      box-shadow 0 2px 10px rgba(0,255,153,0.2);
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      position: relative;
+      transition: 0.2s;
+      padding: 0.5rem 1rem;
+    }
+
+    nav a:hover {
+      color: #00ff99;
+    }
+
+    nav a.active::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #00ff99;
+      border-radius: 3px;
+    }
+
+    /* === Контент === */
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      flex: 1;
+    }
+
+    h2 {
+      color: #00ff99;
+      text-align: center;
+      font-size: 1.8rem;
+    }
+
+    .price-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .price-list li {
+      background: rgba(255, 255, 255, 0.07);
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 10px;
+      transition: 0.2s ease;
+      border-left: 4px solid #00ff99;
+      box-shadow: 0 0 10px rgba(0,255,153,0.15);
+    }
+
+    .price-list li:hover {
+      background: rgba(0, 255, 153, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .price-title {
+      font-size: 1.2rem;
+      color: #fff;
+      font-weight: bold;
+      display: block;
+    }
+
+    .price-value {
+      color: #00ff99;
+      float: right;
+      font-weight: bold;
+    }
+
+    .price-description {
+      color: #bbb;
+      margin-top: 0.3rem;
+      font-size: 0.9rem;
+      clear: both;
+    }
+
+    .button {
+      display: block;
+      width: fit-content;
+      margin: 1.5rem auto;
+      background: #00ff99;
+      color: #000;
+      padding: 0.8rem 1.8rem;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px #00ff99;
+    }
+
+    .button:hover {
+      background: #00cc7a;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00ff99;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: auto;
+      padding: 1.5rem;
+      background: #1a1a1a;
+      font-size: 1rem;
+      color: #ccc;
+      flex-shrink: 0;
+    }
+
+    footer span {
+      color: #00ff99;
+    }
+
+    .contact-link {
+      color: #00ff99;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+
+    /* === Модальное окно === */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+
+    .modal-content {
+      background: #1e1e1e;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      width: 90%;
+      max-width: 300px;
+      position: relative;
+    }
+
+    .modal-content h3 {
+      color: #00ff99;
+      margin-bottom: 1rem;
+    }
+
+    .modal-content a {
+      display: block;
+      background: rgba(255,255,255,0.1);
+      color: #00ff99;
+      text-decoration: none;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    .modal-content a:hover {
+      background: rgba(0,255,153,0.2);
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 1.5rem;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .close-btn:hover {
+      color: #fff;
+    }
+
+    section { display: none; }
+    section.active { display: block; }
+
+    /* === Улучшенная адаптация для мобильных (телефонов) === */
+    @media (max-width: 768px) {
+      header {
+        padding: 1.5rem 1rem 1rem;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      .client-sites-btn, .cart-btn {
+        position: static;
+        display: block;
+        margin: 1rem auto;
+        width: fit-content;
+      }
+      .client-sites-btn {
+        margin-bottom: 0.5rem;
+      }
+      nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+      }
+      nav a {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      nav a.active::after {
+        display: none;
+      }
+      main {
+        margin: 1rem;
+        padding: 1rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      .price-list li {
+        padding: 0.8rem;
+      }
+      .price-title {
+        font-size: 1.1rem;
+      }
+      .price-value {
+        font-size: 1.1rem;
+      }
+      .button {
+        width: 90%;
+        padding: 1rem;
+        font-size: 1rem;
+      }
+      footer {
+        padding: 1rem;
+        font-size: 0.9rem;
+      }
+      .modal-content {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      nav a {
+        font-size: 1rem;
+      }
+      .price-list li {
+        margin: 0.5rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Gorshok Skins</h1>
+    <p>Продажа и улучшение Minecraft-скинов за игровую валюту сервера RPM</p>
+    <button class="client-sites-btn" id="openModal">Сайты клиентов</button>
+  </header>
+
+  <nav>
+    <a href="#" class="active" onclick="showSection('price', this)">Прайс</a>
+    <a href="#" onclick="showSection('agreement', this)">Пользовательское соглашение</a>
+    <a href="contacts.html">Контакты</a>
+  </nav>
+
+  <!-- Основной контент -->
+  <main>
+    <!-- Раздел Прайс -->
+    <section id="price" class="active">
+      <h2>Прайс-лист</h2>
+      <ul class="price-list">
+        <li>
+          <span class="price-title">🎨 Улучшить ваш скин</span>
+          <span class="price-value">50 000</span>
+        </li>
+        <li>
+          <span class="price-title">👕 Поменять одежду (оставить лицо)</span>
+          <span class="price-value">от 100 000+</span>
+          <p class="price-description">*Зависит от сложности</p>
+        </li>
+        <li>
+          <span class="price-title">🧠 Полностью новый скин</span>
+          <span class="price-value">200 000+</span>
+        </li>
+      </ul>
+
+      <a href="contacts.html" class="button">Заказать скин</a>
+    </section>
+
+    <!-- Раздел Пользовательского соглашения -->
+    <section id="agreement">
+      <h2>Пользовательское соглашение</h2>
+      <p style="text-align:left; line-height:1.7rem; color:#ccc;">
+        1. Используя сайт <strong>Gorshok Skins</strong>, вы подтверждаете, что ознакомлены с условиями и согласны с ними.<br><br>
+        2. Все заказы выполняются только после подтверждения администрацией.<br><br>
+        3. Оплата осуществляется исключительно игровой валютой сервера RPM.<br><br>
+        4. Администрация оставляет за собой право отказать в услуге без объяснения причин.<br><br>
+        5. Гарантии качества распространяются только на готовый материал, полученный через официальный контакт.<br><br>
+        6. Использование контента сайта в коммерческих целях без разрешения запрещено.<br><br>
+        7. Сайт не хранит личные данные пользователей и не требует регистрации.<br><br>
+        8. Все споры решаются путем личного общения с администрацией.
+        9. Мы - не офицыальный сайт РПМ!
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    За отдельную плату вы можете <span>арендовать страницу на нашем сайте!</span><br><br>
+    <a href="contacts.html" class="contact-link">Контакты</a>
+  </footer>
+
+  <!-- Модальное окно для сайтов клиентов -->
+  <div class="modal" id="clientModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeModal">&times;</button>
+      <h3>Сайты клиентов</h3>
+      <a href="VIP.html" target="_blank">VIP Сайт</a>
+      <a href="GorshokCH.html" target="_blank">Анонимный чат</a>
+      <!-- 💡 Добавляй новые сайты по примеру ниже -->
+      <!-- <a href="example.html" target="_blank">Название сайта</a> -->
+    </div>
+  </div>
+
+  <script>
+    function showSection(id, el) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    const openModal = document.getElementById('openModal');
+    const closeModal = document.getElementById('closeModal');
+    const modal = document.getElementById('clientModal');
+
+    openModal.addEventListener('click', () => modal.style.display = 'flex');
+    closeModal.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+  </script>
+</body>
+</html>
