@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gorshok Skins — магазин скинов</title>
+  <title>Gorshok Studio — веб-разработка и хостинг</title>
   <style>
     /* === Общие стили === */
     body {
       margin: 0;
       font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #101820, #2e2e2e);
+      background: linear-gradient(135deg, #0f0f23, #1a1a3a, #2d2d5a, #404080);
       background-size: 400% 400%;
-      animation: gradientShift 10s ease infinite;
-      color: #f5f5f5;
+      animation: gradientShift 15s ease infinite;
+      color: #f0f0ff;
+      overflow-x: hidden;
     }
 
     @keyframes gradientShift {
@@ -23,46 +24,48 @@
 
     header {
       text-align: center;
-      padding: 2rem 1rem 1rem;
-      background: #1f1f1f;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      padding: 3rem 1rem 2rem;
+      background: linear-gradient(135deg, rgba(15, 15, 35, 0.9), rgba(26, 26, 58, 0.8));
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 30px rgba(64, 64, 128, 0.3);
       position: relative;
+      border-bottom: 1px solid rgba(64, 64, 128, 0.3);
     }
 
     header h1 {
-      color: #00ff99;
-      font-size: 2.5rem;
+      color: #a0a0ff;
+      font-size: 3rem;
       margin: 0;
-      text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99;
+      text-shadow: 0 0 20px rgba(160, 160, 255, 0.5);
+      font-weight: 300;
+      letter-spacing: 2px;
     }
 
     header p {
-      font-size: 1.1rem;
-      color: #ccc;
-      margin-top: 0.3rem;
+      font-size: 1.3rem;
+      color: #c0c0e0;
+      margin-top: 0.8rem;
+      text-shadow: 0 0 10px rgba(192, 192, 224, 0.3);
     }
 
-    /* === Верхние кнопки === */
-    .client-sites-btn, .cart-btn {
-      position: absolute;
-      top: 1rem;
-      background: #00ff99;
-      color: #000;
+    /* === Кнопки в header === */
+    .portfolio-btn, .contact-btn {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
       border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      font-weight: bold;
+      padding: 0.8rem 1.5rem;
+      border-radius: 12px;
       cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 0 10px #00ff99;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(79, 70, 229, 0.3);
+      font-size: 0.9rem;
     }
 
-    .client-sites-btn { right: 1rem; }
-    .cart-btn { left: 1rem; }
-
-    .client-sites-btn:hover, .cart-btn:hover {
-      background: #00cc7a;
-      transform: scale(1.05);
+    .portfolio-btn:hover, .contact-btn:hover {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(79, 70, 229, 0.5);
     }
 
     /* === Навигация === */
@@ -70,32 +73,44 @@
       display: flex;
       justify-content: center;
       gap: 3rem;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 1rem;
-      box-shadow: 0 2px 10px rgba(0,255,153,0.2);
+      background: linear-gradient(135deg, rgba(64, 64, 128, 0.1), rgba(79, 70, 229, 0.05));
+      backdrop-filter: blur(15px);
+      padding: 1.2rem;
+      box-shadow: 0 0 20px rgba(64, 64, 128, 0.2);
+      border-radius: 20px;
+      margin: 2rem 0;
+      border: 1px solid rgba(64, 64, 128, 0.2);
     }
 
     nav a {
-      color: #fff;
+      color: #e0e0ff;
       text-decoration: none;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       position: relative;
-      transition: 0.2s;
+      transition: all 0.3s ease;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      text-shadow: 0 0 5px rgba(224, 224, 255, 0.2);
     }
 
     nav a:hover {
-      color: #00ff99;
+      color: #ffffff;
+      background: rgba(79, 70, 229, 0.1);
+      transform: translateY(-2px);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
     }
 
     nav a.active::after {
       content: "";
       position: absolute;
-      bottom: -5px;
-      left: 0;
-      right: 0;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
       height: 3px;
-      background: #00ff99;
+      background: linear-gradient(90deg, #4f46e5, #7c3aed);
       border-radius: 3px;
+      box-shadow: 0 0 10px rgba(79, 70, 229, 0.5);
     }
 
     /* === Контент === */
@@ -109,8 +124,404 @@
     }
 
     h2 {
-      color: #00ff99;
       text-align: center;
+      color: #a0a0ff;
+      font-size: 2.2rem;
+      margin-top: 3rem;
+      text-shadow: 0 0 15px rgba(160, 160, 255, 0.4);
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8rem;
+      color: #e0e0ff;
+      text-align: center;
+      white-space: pre-line;
+      text-shadow: 0 0 5px rgba(224, 224, 255, 0.2);
+    }
+
+    /* Сетка услуг */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(124, 58, 237, 0.05));
+      border: 2px solid rgba(79, 70, 229, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(79, 70, 229, 0.1), transparent);
+      transform: rotate(45deg);
+      transition: all 0.4s ease;
+      opacity: 0;
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+      animation: cardShine 0.8s ease-in-out;
+    }
+
+    @keyframes cardShine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(79, 70, 229, 0.6);
+      box-shadow: 0 0 30px rgba(79, 70, 229, 0.4);
+    }
+
+    .service-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      color: #c0c0ff;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px rgba(192, 192, 255, 0.3);
+    }
+
+    .service-card p {
+      color: #d0d0f0;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .service-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      justify-content: center;
+    }
+
+    .service-features span {
+      background: rgba(79, 70, 229, 0.2);
+      color: #a0a0ff;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(79, 70, 229, 0.3);
+    }
+
+    .service-btn {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(79, 70, 229, 0.3);
+      margin-top: 1rem;
+    }
+
+    .service-btn:hover {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(79, 70, 229, 0.5);
+    }
+
+    /* Сайты клиентов */
+    .client-sites-section {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 2px solid rgba(160, 160, 255, 0.2);
+    }
+
+    .client-sites-section h3 {
+      color: #a0a0ff;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+    }
+
+    .client-sites-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .client-site-card {
+      background: linear-gradient(135deg, rgba(26, 26, 58, 0.9), rgba(45, 45, 90, 0.8));
+      border: 2px solid rgba(160, 160, 255, 0.3);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .client-site-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(160, 160, 255, 0.6);
+      box-shadow: 0 0 25px rgba(160, 160, 255, 0.3);
+    }
+
+    .site-preview {
+      width: 100%;
+      height: 120px;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .site-preview.vip-site {
+      background: linear-gradient(135deg, #ff00c8, #ff4fd8);
+    }
+
+    .site-preview.chat-site {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    }
+
+    .site-preview.gadalka-site {
+      background: linear-gradient(135deg, #7b3eff, #b36bff);
+    }
+
+    .client-site-card h4 {
+      color: #e0e0ff;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .client-site-card p {
+      color: #c0c0e0;
+      font-size: 1rem;
+    }
+
+    /* Цены в разделе о нас */
+    .pricing-info {
+      background: rgba(160, 160, 255, 0.05);
+      border: 1px solid rgba(160, 160, 255, 0.2);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .pricing-info h3 {
+      color: #a0a0ff;
+      margin-bottom: 1rem;
+    }
+
+    .pricing-info p {
+      color: #e0e0ff;
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+    }
+
+    /* Хостинг карточки */
+    .hosting-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .hosting-card {
+      background: linear-gradient(135deg, rgba(26, 26, 58, 0.9), rgba(45, 45, 90, 0.8));
+      border: 2px solid rgba(79, 70, 229, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .hosting-card.featured {
+      border-color: rgba(168, 85, 247, 0.5);
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(196, 181, 253, 0.05));
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: -10px;
+      right: 20px;
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .hosting-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(79, 70, 229, 0.6);
+      box-shadow: 0 0 25px rgba(79, 70, 229, 0.3);
+    }
+
+    .hosting-card h3 {
+      color: #e0e0ff;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .hosting-price {
+      color: #7c3aed;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
+    }
+
+    .hosting-features {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .hosting-features li {
+      color: #d0d0f0;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(79, 70, 229, 0.2);
+      font-size: 0.95rem;
+    }
+
+    .hosting-features li:last-child {
+      border-bottom: none;
+    }
+
+    .hosting-btn {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(79, 70, 229, 0.3);
+    }
+
+    .hosting-btn.primary {
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+    }
+
+    .hosting-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(79, 70, 229, 0.5);
+    }
+
+    /* Карточки скинов */
+    .skins-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .skin-card {
+      background: linear-gradient(135deg, rgba(45, 45, 90, 0.8), rgba(64, 64, 128, 0.6));
+      border: 1px solid rgba(160, 160, 255, 0.3);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .skin-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(160, 160, 255, 0.5);
+      box-shadow: 0 0 20px rgba(160, 160, 255, 0.2);
+    }
+
+    .skin-card h3 {
+      color: #c0c0ff;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .skin-card p {
+      color: #e0e0ff;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .skin-price {
+      color: #00ff99;
+      font-size: 1.4rem;
+      font-weight: bold;
+      text-shadow: 0 0 8px rgba(0, 255, 153, 0.4);
+    }
+
+    /* Раздел О нас */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-content p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .advantages-list {
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .advantages-list li {
+      color: #e0e0ff;
+      padding: 0.8rem 0;
+      font-size: 1.1rem;
+      border-bottom: 1px solid rgba(160, 160, 255, 0.2);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #7c3aed;
+      text-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
+    }
+
+    .stat-label {
+      color: #c0c0e0;
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
     }
 
     .price-list {
@@ -255,82 +666,527 @@
     section.active { display: block; }
 
     /* === Адаптация для телефонов === */
-    @media (max-width: 600px) {
-      header h1 { font-size: 2rem; }
-      .client-sites-btn, .cart-btn { padding: 0.8rem 1rem; font-size: 0.9rem; }
-      .button { width: 80%; text-align: center; }
+    @media (max-width: 768px) {
+      /* Header adjustments */
+      header {
+        padding: 1rem 0.5rem;
+        position: relative;
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+
+      header p {
+        font-size: 0.9rem;
+        padding: 0 1rem;
+      }
+
+      /* Button positioning fix for mobile */
+      .client-sites-btn, .cart-btn {
+        position: static;
+        display: block;
+        width: calc(50% - 1rem);
+        margin: 0.5rem auto;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+
+      /* Navigation mobile layout */
+      nav {
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 1rem 0.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        margin: 1rem 0;
+        border-radius: 10px;
+      }
+
+      nav a {
+        padding: 1rem;
+        text-align: center;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        font-size: 1.1rem;
+        font-weight: 500;
+        border: 2px solid transparent;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      nav a:hover {
+        background: rgba(0, 255, 153, 0.15);
+        color: #00ff99;
+        border-color: #00ff99;
+        transform: translateY(-2px);
+        box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
+      }
+
+      nav a.active {
+        background: rgba(0, 255, 153, 0.1);
+        color: #00ff99;
+        border-color: #00ff99;
+      }
+
+      /* Services mobile */
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .service-card {
+        padding: 1.5rem;
+      }
+
+      .service-icon {
+        font-size: 2.5rem;
+      }
+
+      .service-card h3 {
+        font-size: 1.3rem;
+      }
+
+      .service-features {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .service-btn {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      /* Client sites mobile */
+      .client-sites-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .site-preview {
+        height: 100px;
+      }
+
+      /* About mobile */
+      .pricing-info {
+        padding: 1.5rem;
+      }
+
+      .pricing-info p {
+        font-size: 1rem;
+      }
+
+      .advantages-list {
+        text-align: center;
+      }
+
+      /* Hosting mobile */
+      .hosting-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .hosting-card {
+        padding: 1.5rem;
+      }
+
+      .hosting-card h3 {
+        font-size: 1.4rem;
+      }
+
+      .hosting-price {
+        font-size: 1.6rem;
+      }
+
+      .hosting-features {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .hosting-btn {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      /* Skins mobile */
+      .skins-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .skin-card {
+        padding: 1.2rem;
+      }
+
+      .skin-card h3 {
+        font-size: 1.2rem;
+      }
+
+      /* About mobile */
+      .stats {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+      }
+
+      .advantages-list {
+        text-align: center;
+      }
+
+      /* Price list mobile layout */
+      .price-list li {
+        margin: 0.8rem 0;
+        padding: 1.2rem;
+        text-align: left;
+        border-radius: 12px;
+      }
+
+      .price-title {
+        font-size: 1.1rem;
+        display: block;
+        margin-bottom: 0.8rem;
+        line-height: 1.4;
+        font-weight: 600;
+      }
+
+      .price-value {
+        float: none;
+        display: block;
+        text-align: left;
+        margin-top: 0.5rem;
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #00ff99;
+        text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+      }
+
+      /* Button mobile */
+      .button {
+        width: 90%;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        margin: 1rem auto;
+      }
+
+      /* Modal mobile optimization */
+      .modal {
+        padding: 1rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+      }
+
+      .modal-content {
+        margin: 0;
+        padding: 1.5rem;
+        min-width: auto;
+        max-width: none;
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+        animation: modalSlideIn 0.3s ease-out;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal-content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+        text-align: center;
+      }
+
+      .modal-content a {
+        padding: 0.8rem 1rem;
+        margin: 0.6rem 0;
+        font-size: 1rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .modal-btn {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .modal-content a:hover {
+        background: rgba(0, 255, 153, 0.25);
+        transform: translateX(5px);
+      }
+
+      .modal-btn {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(79, 70, 229, 0.3);
+        margin-top: 1rem;
+      }
+
+      .modal-btn:hover {
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        transform: translateY(-2px);
+        box-shadow: 0 0 25px rgba(79, 70, 229, 0.5);
+      }
+
+      /* Footer mobile */
+      footer {
+        margin-top: 2rem;
+        padding: 1.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Small screens */
+    @media (max-width: 480px) {
+      /* Header adjustments for very small screens */
+      header {
+        padding: 0.8rem 0.3rem;
+      }
+
+      header h1 {
+        font-size: 1.4rem;
+        line-height: 1.2;
+      }
+
+      header p {
+        font-size: 0.85rem;
+        padding: 0 0.5rem;
+        line-height: 1.3;
+      }
+
+      /* Navigation for very small screens */
+      nav {
+        gap: 0.6rem;
+        padding: 0.8rem 0.3rem;
+        margin: 0.8rem 0;
+      }
+
+      nav a {
+        font-size: 0.9rem;
+        padding: 0.8rem 0.5rem;
+        font-weight: 600;
+      }
+
+      /* Main content for very small screens */
+      main {
+        margin: 0.8rem 0.3rem;
+        padding: 0.8rem;
+      }
+
+      /* Price list for very small screens */
+      .price-list li {
+        margin: 0.6rem 0;
+        padding: 0.8rem;
+        border-radius: 8px;
+      }
+
+      .price-title {
+        font-size: 1rem;
+        margin-bottom: 0.6rem;
+        line-height: 1.3;
+      }
+
+      .price-value {
+        font-size: 1.1rem;
+        margin-top: 0.4rem;
+      }
+
+      /* Buttons for very small screens */
+      .button {
+        width: 95%;
+        padding: 0.8rem 0.5rem;
+        font-size: 0.9rem;
+        margin: 0.8rem auto;
+      }
+
+      /* Header buttons for very small screens */
+      .client-sites-btn, .cart-btn {
+        width: 85%;
+        font-size: 0.8rem;
+        padding: 0.7rem 0.8rem;
+        margin: 0.4rem auto;
+      }
+
+      /* Modal for very small screens */
+      .modal-content {
+        padding: 1.2rem;
+        border-radius: 12px;
+      }
+
+      .modal-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+
+      .modal-content a {
+        padding: 0.7rem 0.8rem;
+        margin: 0.5rem 0;
+        font-size: 0.95rem;
+      }
+
+      /* Footer for very small screens */
+      footer {
+        margin-top: 1.5rem;
+        padding: 0.8rem 0.3rem;
+        font-size: 0.85rem;
+        line-height: 1.4;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Gorshok Skins</h1>
-    <p>Продажа и улучшение Minecraft-скинов за игровую валюту сервера RPM</p>
-    <button class="client-sites-btn" id="openModal">Сайты клиентов</button>
+    <h1>Gorshok Studio</h1>
+    <p>Создание сайтов и хостинг за игровую валюту сервера RPM</p>
+    <div>
+      <button class="portfolio-btn" onclick="showSection('services', this)">Наши услуги</button>
+      <button class="contact-btn" onclick="showSection('about', this)">Контакты</button>
+    </div>
   </header>
 
   <nav>
-    <a href="#" class="active" onclick="showSection('price', this)">Прайс</a>
-    <a href="#" onclick="showSection('agreement', this)">Пользовательское соглашение</a>
-    <a href="contacts.html">Контакты</a>
+    <a href="#" class="active" onclick="showSection('services', this)">Услуги</a>
+    <a href="#" onclick="showSection('skins', this)">Скины</a>
+    <a href="#" onclick="showSection('about', this)">О нас</a>
   </nav>
 
   <!-- Основной контент -->
   <main>
-    <!-- Раздел Прайс -->
-    <section id="price" class="active">
-      <h2>Прайс-лист</h2>
-      <ul class="price-list">
-        <li>
-          <span class="price-title">🎨 Улучшить ваш скин</span>
-          <span class="price-value">50 000</span>
-        </li>
-        <li>
-          <span class="price-title">👕 Поменять одежду (оставить лицо)</span>
-          <span class="price-value">от 100 000+</span>
-          <p style="color:#bbb; margin-top:0.3rem;">*Зависит от сложности</p>
-        </li>
-        <li>
-          <span class="price-title">🧠 Полностью новый скин</span>
-          <span class="price-value">200 000+</span>
-        </li>
-      </ul>
+    <!-- Раздел Услуг (основной) -->
+    <section id="services" class="active">
+      <h2>Наши услуги</h2>
+      <div class="services-grid">
+        <div class="service-card main-service">
+          <div class="service-icon">🌐</div>
+          <h3>Создание сайтов</h3>
+          <p>Полноценный сайт с уникальным дизайном и функционалом. Идеально подходит для презентации вашего проекта в игровом мире.</p>
+          <div class="service-features">
+            <span>Адаптивный дизайн</span>
+            <span>SEO-оптимизация</span>
+            <span>Быстрая загрузка</span>
+          </div>
+          <div class="service-price">50 000 игровых монет + 10% с продаж</div>
+          <button class="service-btn order-btn" data-service="site">Заказать сайт</button>
+        </div>
 
-      <a href="contacts.html" class="button">Заказать скин</a>
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <h3>Создание скинов</h3>
+          <p>Профессиональное создание уникальных скинов для Minecraft любой сложности.</p>
+          <div class="service-features">
+            <span>HD качество</span>
+            <span>Кастомные текстуры</span>
+            <span>Быстрая доставка</span>
+          </div>
+          <div class="service-price">от 50 000 игровых монет</div>
+          <button class="service-btn skins-btn">Перейти к скинам</button>
+        </div>
+      </div>
+
+      <!-- Сайты клиентов как основной контент -->
+      <div class="client-sites-section">
+        <h3>Наши проекты</h3>
+        <div class="client-sites-grid">
+          <a href="VIP.html" class="client-site-card" target="_blank">
+            <div class="site-preview vip-site"></div>
+            <h4>VIP Сайт</h4>
+            <p>Премиальный сайт для VIP услуг</p>
+          </a>
+
+          <a href="GorshokCH.html" class="client-site-card" target="_blank">
+            <div class="site-preview chat-site"></div>
+            <h4>Анонимный чат</h4>
+            <p>Безопасное общение для игроков</p>
+          </a>
+
+          <a href="Gadalka.html" class="client-site-card" target="_blank">
+            <div class="site-preview gadalka-site"></div>
+            <h4>Гадалка</h4>
+            <p>Мистические предсказания за игровую валюту</p>
+          </a>
+        </div>
+      </div>
     </section>
 
-    <!-- Раздел Пользовательского соглашения -->
-    <section id="agreement">
-      <h2>Пользовательское соглашение</h2>
-      <p style="text-align:left; line-height:1.7rem; color:#ccc;">
-        1. Используя сайт <strong>Gorshok Skins</strong>, вы подтверждаете, что ознакомлены с условиями и согласны с ними.<br><br>
-        2. Все заказы выполняются только после подтверждения администрацией.<br><br>
-        3. Оплата осуществляется исключительно игровой валютой сервера RPM.<br><br>
-        4. Администрация оставляет за собой право отказать в услуге без объяснения причин.<br><br>
-        5. Гарантии качества распространяются только на готовый материал, полученный через официальный контакт.<br><br>
-        6. Использование контента сайта в коммерческих целях без разрешения запрещено.<br><br>
-        7. Сайт не хранит личные данные пользователей и не требует регистрации.<br><br>
-        8. Все споры решаются путем личного общения с администрацией.
-      </p>
+    <!-- Раздел Скинов (дополнительная услуга) -->
+    <section id="skins">
+      <h2>Создание скинов</h2>
+      <p style="text-align: center; margin-bottom: 2rem; color: #c0c0e0;">Дополнительная услуга для любителей Minecraft</p>
+      <div class="skins-grid">
+        <div class="skin-card">
+          <h3>🎨 Улучшение скина</h3>
+          <p>Профессиональное улучшение вашего текущего скина</p>
+          <div class="skin-price">50 000 игровых монет</div>
+        </div>
+
+        <div class="skin-card">
+          <h3>👕 Смена одежды</h3>
+          <p>Изменение одежды с сохранением лица</p>
+          <div class="skin-price">от 100 000 игровых монет</div>
+        </div>
+
+        <div class="skin-card">
+          <h3>🧠 Полностью новый скин</h3>
+          <p>Создание уникального скина с нуля</p>
+          <div class="skin-price">от 200 000 игровых монет</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Раздел О нас -->
+    <section id="about">
+      <h2>О компании</h2>
+      <div class="about-content">
+        <p>Gorshok Studio — это творческая студия, специализирующаяся на создании уникальных сайтов и предоставлении хостинга за игровую валюту сервера RPM.</p>
+
+        <h3>Что мы предлагаем:</h3>
+        <ul class="advantages-list">
+          <li>Создание сайтов любой сложности за игровую валюту</li>
+          <li>Надежный хостинг с защитой от DDoS</li>
+          <li>Индивидуальный подход к каждому клиенту</li>
+          <li>Поддержка и обновление проектов</li>
+          <li>Гарантия качества всех услуг</li>
+        </ul>
+
+        <div class="pricing-info">
+          <h3>Цены:</h3>
+          <p><strong>Создание сайта:</strong> 50 000 игровых монет + 10% с продаж сайта</p>
+          <p><strong>Хостинг:</strong> от 10 000 игровых монет в месяц</p>
+          <p><strong>Скины:</strong> от 50 000 игровых монет</p>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
     За отдельную плату вы можете <span>арендовать страницу на нашем сайте!</span><br><br>
-    <a href="contacts.html" class="contact-link">Контакты</a>
+    <a href="contacts.html" class="contact-link">Связаться с нами</a>
   </footer>
 
-  <!-- Модальное окно для сайтов клиентов -->
-  <div class="modal" id="clientModal">
+  <!-- Модальное окно для заказов -->
+  <div class="modal" id="orderModal">
     <div class="modal-content">
-      <button class="close-btn" id="closeModal">&times;</button>
-      <h3>Сайты клиентов</h3>
-      <a href="VIP.html" target="_blank">VIP Сайт</a>
-      <a href="GorshokCH.html" target="_blank">Анонимный чат</a>
-      <a href="Gadalka.html" target="_blank">Лучшие гадания всего RPM!</a>
-      <!-- 💡 Добавляй новые сайты по примеру ниже -->
-      <!-- <a href="example.html" target="_blank">Название сайта</a> -->
+      <button class="close-btn" id="closeOrderModal">&times;</button>
+      <h3>Информация о заказе</h3>
+      <p>Все заказы опишите мне в личные сообщения</p>
+      <p>После закрытия этого окна вы будете перенаправлены в раздел контактов для связи со мной.</p>
+      <button class="modal-btn" onclick="redirectToContacts()">Понятно, перейти к контактам</button>
     </div>
   </div>
 
@@ -343,15 +1199,56 @@
       el.classList.add('active');
     }
 
-    const openModal = document.getElementById('openModal');
-    const closeModal = document.getElementById('closeModal');
-    const modal = document.getElementById('clientModal');
+    // Обработка кликов на кнопки заказов
+    document.addEventListener('DOMContentLoaded', function() {
+      // Кнопки заказов
+      const orderButtons = document.querySelectorAll('.order-btn');
+      orderButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          showOrderModal();
+        });
+      });
 
-    openModal.addEventListener('click', () => modal.style.display = 'flex');
-    closeModal.addEventListener('click', () => modal.style.display = 'none');
-    window.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+      // Кнопка перехода к скинам
+      const skinsButton = document.querySelector('.skins-btn');
+      if (skinsButton) {
+        skinsButton.addEventListener('click', function() {
+          showSection('skins', document.querySelector('nav a[href="#"]:nth-child(2)'));
+        });
+      }
+
+      // Кнопки скинов в секции скинов
+      const skinCards = document.querySelectorAll('.skin-card');
+      skinCards.forEach(card => {
+        card.addEventListener('click', function() {
+          showOrderModal();
+        });
+      });
+    });
+
+    // Модальные окна
+    const clientModal = document.getElementById('clientModal');
+    const orderModal = document.getElementById('orderModal');
+
+    function showOrderModal() {
+      orderModal.style.display = 'flex';
+    }
+
+    function redirectToContacts() {
+      orderModal.style.display = 'none';
+      window.location.href = 'contacts.html';
+    }
+
+    // Закрытие модальных окон
+    document.getElementById('closeOrderModal').addEventListener('click', () => {
+      orderModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', e => {
+      if (e.target === orderModal) {
+        orderModal.style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>
-
-

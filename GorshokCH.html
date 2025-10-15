@@ -109,9 +109,113 @@
     button:hover {
       background: #00cc7a;
     }
+
+    /* === Мобильная адаптивность === */
+    @media (max-width: 768px) {
+      /* Header мобильный */
+      header {
+        padding: 0.8rem 1rem;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.3rem;
+      }
+
+      header p {
+        font-size: 0.9rem;
+      }
+
+      .back-btn {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+
+      /* Чат мобильный */
+      #chat-box {
+        padding: 0.8rem;
+        gap: 0.5rem;
+      }
+
+      /* Сообщения мобильные */
+      .message {
+        max-width: 90%;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.95rem;
+      }
+
+      .message small {
+        font-size: 0.7rem;
+        margin-top: 0.3rem;
+      }
+
+      /* Footer мобильный */
+      footer {
+        padding: 0.6rem;
+        gap: 0.5rem;
+        flex-direction: column;
+      }
+
+      input {
+        padding: 0.8rem;
+        font-size: 1rem;
+        border-radius: 8px;
+      }
+
+      button {
+        padding: 0.8rem;
+        font-size: 1rem;
+        border-radius: 8px;
+        width: 100%;
+      }
+    }
+
+    /* Маленькие экраны */
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+
+      header p {
+        font-size: 0.85rem;
+      }
+
+      .back-btn {
+        padding: 0.7rem;
+        font-size: 0.85rem;
+      }
+
+      #chat-box {
+        padding: 0.6rem;
+      }
+
+      .message {
+        max-width: 95%;
+        padding: 0.5rem 0.7rem;
+        font-size: 0.9rem;
+      }
+
+      .message small {
+        font-size: 0.65rem;
+      }
+
+      footer {
+        padding: 0.5rem;
+      }
+
+      input {
+        padding: 0.7rem;
+        font-size: 0.95rem;
+      }
+
+      button {
+        padding: 0.7rem;
+        font-size: 0.95rem;
+      }
+    }
   </style>
-</head>
-<body>
 </head>
 <body>
   <header>
@@ -121,7 +225,6 @@
       <button class="back-btn" onclick="location.href='index.html'">Вернуться к скинам</button>
     </div>
   </header>
-
 
   <main id="chat-box"></main>
 
@@ -243,4 +346,3 @@
   </script>
 </body>
 </html>
-

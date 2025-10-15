@@ -8,7 +8,8 @@
     body {
       margin: 0;
       font-family: "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top right, #160028, #050008);
+      background: radial-gradient(circle at center, #0a0015 0%, #1a0028 30%, #2d003d 60%, #160028 100%);
+      background-attachment: fixed;
       color: #fff;
       overflow-x: hidden;
       position: relative;
@@ -62,6 +63,249 @@
       50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
     }
 
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+      25% { transform: translateY(-20px) rotate(90deg); opacity: 0.6; }
+      50% { transform: translateY(-10px) rotate(180deg); opacity: 0.4; }
+      75% { transform: translateY(-30px) rotate(270deg); opacity: 0.7; }
+      100% { transform: translateY(0px) rotate(360deg); opacity: 0.3; }
+    }
+
+    /* Мигающие звездочки для таинственности */
+    .twinkling-stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    .star:nth-child(1) {
+      width: 2px;
+      height: 2px;
+      top: 15%;
+      left: 20%;
+      animation-duration: 2.5s;
+      animation-delay: 0s;
+    }
+
+    .star:nth-child(2) {
+      width: 1px;
+      height: 1px;
+      top: 25%;
+      right: 30%;
+      animation-duration: 3.2s;
+      animation-delay: 0.5s;
+    }
+
+    .star:nth-child(3) {
+      width: 3px;
+      height: 3px;
+      top: 35%;
+      left: 70%;
+      animation-duration: 2.8s;
+      animation-delay: 1s;
+    }
+
+    .star:nth-child(4) {
+      width: 1px;
+      height: 1px;
+      top: 45%;
+      right: 15%;
+      animation-duration: 3.5s;
+      animation-delay: 1.5s;
+    }
+
+    .star:nth-child(5) {
+      width: 2px;
+      height: 2px;
+      top: 55%;
+      left: 45%;
+      animation-duration: 2.2s;
+      animation-delay: 2s;
+    }
+
+    .star:nth-child(6) {
+      width: 1px;
+      height: 1px;
+      top: 65%;
+      right: 60%;
+      animation-duration: 3.8s;
+      animation-delay: 2.5s;
+    }
+
+    .star:nth-child(7) {
+      width: 3px;
+      height: 3px;
+      top: 75%;
+      left: 25%;
+      animation-duration: 2.7s;
+      animation-delay: 3s;
+    }
+
+    .star:nth-child(8) {
+      width: 1px;
+      height: 1px;
+      top: 85%;
+      right: 40%;
+      animation-duration: 3.1s;
+      animation-delay: 3.5s;
+    }
+
+    .star:nth-child(9) {
+      width: 2px;
+      height: 2px;
+      top: 10%;
+      left: 85%;
+      animation-duration: 2.9s;
+      animation-delay: 4s;
+    }
+
+    .star:nth-child(10) {
+      width: 1px;
+      height: 1px;
+      top: 30%;
+      left: 15%;
+      animation-duration: 3.3s;
+      animation-delay: 4.5s;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Парящие руны для мистической атмосферы */
+    .floating-runes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .rune {
+      position: absolute;
+      color: rgba(193, 133, 255, 0.4);
+      font-size: 2rem;
+      font-weight: bold;
+      animation: floatRune 15s infinite linear;
+      text-shadow: 0 0 10px rgba(193, 133, 255, 0.6);
+    }
+
+    .rune:nth-child(1) {
+      top: 20%;
+      left: 15%;
+      animation-duration: 18s;
+      animation-delay: 0s;
+    }
+
+    .rune:nth-child(2) {
+      top: 60%;
+      right: 20%;
+      animation-duration: 22s;
+      animation-delay: 3s;
+      animation-direction: reverse;
+    }
+
+    .rune:nth-child(3) {
+      top: 40%;
+      left: 75%;
+      animation-duration: 20s;
+      animation-delay: 6s;
+    }
+
+    .rune:nth-child(4) {
+      top: 80%;
+      left: 50%;
+      animation-duration: 16s;
+      animation-delay: 9s;
+    }
+
+    .rune:nth-child(5) {
+      top: 10%;
+      right: 10%;
+      animation-duration: 25s;
+      animation-delay: 12s;
+    }
+
+    @keyframes floatRune {
+      0% { transform: translateY(0px) rotate(0deg) scale(1); opacity: 0.3; }
+      25% { transform: translateY(-30px) rotate(90deg) scale(1.1); opacity: 0.6; }
+      50% { transform: translateY(-20px) rotate(180deg) scale(0.9); opacity: 0.4; }
+      75% { transform: translateY(-40px) rotate(270deg) scale(1.1); opacity: 0.7; }
+      100% { transform: translateY(0px) rotate(360deg) scale(1); opacity: 0.3; }
+    }
+
+    /* Эффект дыма для атмосферы таинственности */
+    .mystical-smoke {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .smoke-cloud {
+      position: absolute;
+      background: radial-gradient(circle, rgba(139, 0, 221, 0.1), rgba(139, 0, 221, 0.05), transparent);
+      border-radius: 50%;
+      animation: driftSmoke 25s infinite linear;
+      filter: blur(3px);
+    }
+
+    .smoke-cloud:nth-child(1) {
+      width: 200px;
+      height: 100px;
+      top: 30%;
+      left: -50px;
+      animation-duration: 30s;
+      animation-delay: 0s;
+    }
+
+    .smoke-cloud:nth-child(2) {
+      width: 150px;
+      height: 80px;
+      top: 70%;
+      right: -50px;
+      animation-duration: 35s;
+      animation-delay: 5s;
+      animation-direction: reverse;
+    }
+
+    .smoke-cloud:nth-child(3) {
+      width: 180px;
+      height: 90px;
+      top: 50%;
+      left: 20%;
+      animation-duration: 28s;
+      animation-delay: 10s;
+    }
+
+    @keyframes driftSmoke {
+      0% { transform: translateX(-100px) scale(1); opacity: 0.3; }
+      25% { transform: translateX(50px) scale(1.2); opacity: 0.6; }
+      50% { transform: translateX(100px) scale(0.8); opacity: 0.4; }
+      75% { transform: translateX(150px) scale(1.1); opacity: 0.7; }
+      100% { transform: translateX(200px) scale(1); opacity: 0.3; }
+    }
+
     header {
       display: flex;
       justify-content: space-between;
@@ -75,72 +319,91 @@
     }
 
     header h1 {
-      color: #c086ff;
+      color: #e8d5ff;
       font-size: 1.8rem;
       margin: 0;
+      text-shadow: 0 0 15px rgba(232, 213, 255, 0.6);
     }
 
     .back-btn {
-      background: linear-gradient(90deg, #9a63ff, #c083ff);
+      background: linear-gradient(135deg, #8b00d4, #a855f7, #c084fc);
       color: white;
       border: none;
-      padding: 0.6rem 1.3rem;
-      border-radius: 10px;
+      padding: 0.8rem 1.5rem;
+      border-radius: 15px;
       cursor: pointer;
       font-weight: bold;
-      transition: 0.3s;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 20px rgba(139, 0, 212, 0.4);
     }
 
     .back-btn:hover {
-      transform: scale(1.05);
-      opacity: 0.85;
+      transform: scale(1.08) translateY(-3px);
+      box-shadow: 0 0 30px rgba(139, 0, 212, 0.7);
+      background: linear-gradient(135deg, #a855f7, #c084fc, #ddd6fe);
     }
 
     .cart-btn {
-      background: #b36bff;
+      background: linear-gradient(135deg, #7c3aed, #8b5cf6, #a78bfa);
       color: white;
       border: none;
-      padding: 0.6rem 1rem;
-      border-radius: 10px;
+      padding: 0.8rem 1.3rem;
+      border-radius: 15px;
       cursor: pointer;
       font-weight: bold;
-      transition: 0.3s;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
     }
 
     .cart-btn:hover {
-      background: #9a4aff;
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa, #c4b5fd);
+      transform: scale(1.08);
+      box-shadow: 0 0 30px rgba(124, 58, 237, 0.7);
     }
 
     nav {
       display: flex;
       justify-content: center;
       gap: 3rem;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 1rem;
-      box-shadow: 0 2px 10px rgba(193, 133, 255, 0.3);
+      background: linear-gradient(135deg, rgba(139, 0, 212, 0.08), rgba(168, 85, 247, 0.05));
+      backdrop-filter: blur(15px);
+      padding: 1.2rem;
+      box-shadow: 0 0 25px rgba(139, 0, 212, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+      border-radius: 25px;
+      margin: 1.5rem 0;
+      border: 1px solid rgba(139, 0, 212, 0.2);
     }
 
     nav a {
-      color: #fff;
+      color: #f3e8ff;
       text-decoration: none;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       position: relative;
-      transition: 0.2s;
+      transition: all 0.4s ease;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      text-shadow: 0 0 5px rgba(243, 232, 255, 0.3);
     }
 
     nav a:hover {
-      color: #b36bff;
+      color: #ffffff;
+      background: rgba(139, 0, 212, 0.15);
+      transform: translateY(-3px);
+      text-shadow: 0 0 15px rgba(243, 232, 255, 0.7);
+      box-shadow: 0 0 20px rgba(139, 0, 212, 0.4);
     }
 
     nav a.active::after {
       content: "";
       position: absolute;
-      bottom: -5px;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: #c086ff;
-      border-radius: 3px;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 4px;
+      background: linear-gradient(90deg, #8b5cf6, #a78bfa, #c4b5fd);
+      border-radius: 4px;
+      box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
     }
 
     main {
@@ -172,44 +435,87 @@
     }
 
     .card {
-      background: linear-gradient(135deg, #7b3eff, #b36bff, #ffd700);
-      border-radius: 15px;
+      background: linear-gradient(135deg, #4a0077 0%, #6b00aa 25%, #8d00dd 50%, #b300ff 75%, #d400ff 100%);
+      border-radius: 20px;
       text-align: center;
-      padding: 1.5rem;
-      box-shadow: 0 0 20px rgba(180, 100, 255, 0.4);
-      color: #000;
-      transition: transform 0.2s;
+      padding: 2rem;
+      box-shadow: 0 0 30px rgba(139, 0, 221, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.1);
+      color: #fff;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(139, 0, 221, 0.4);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transform: rotate(45deg);
+      transition: all 0.4s ease;
+      opacity: 0;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+      animation: mysticalShine 0.8s ease-in-out;
+    }
+
+    @keyframes mysticalShine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
     }
 
     .card:hover {
-      transform: scale(1.05);
+      transform: translateY(-15px) scale(1.08);
+      box-shadow: 0 0 50px rgba(139, 0, 221, 0.8), inset 0 0 40px rgba(255, 255, 255, 0.2);
+      border-color: rgba(139, 0, 221, 0.8);
     }
 
     .card h3 {
-      margin: 0;
-      font-size: 1.3rem;
+      margin: 0 0 1rem 0;
+      font-size: 1.4rem;
       font-weight: bold;
+      color: #fff8e1;
+      text-shadow: 0 0 10px rgba(255, 248, 225, 0.5);
+      position: relative;
+      z-index: 2;
     }
 
     .card p {
       margin: 0.8rem 0;
-      color: #000;
+      color: #e8f4fd;
       font-weight: bold;
+      font-size: 1.5rem;
+      text-shadow: 0 0 8px rgba(232, 244, 253, 0.4);
+      position: relative;
+      z-index: 2;
     }
 
     .card button {
       border: none;
-      background: #7b3eff;
+      background: linear-gradient(135deg, #8d00dd, #b300ff);
       color: white;
-      padding: 0.6rem 1rem;
-      border-radius: 10px;
+      padding: 0.9rem 1.8rem;
+      border-radius: 15px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: all 0.4s ease;
       font-weight: bold;
+      font-size: 1.1rem;
+      margin-top: 1.2rem;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 15px rgba(139, 0, 221, 0.4);
     }
 
     .card button:hover {
-      background: #9a63ff;
+      background: linear-gradient(135deg, #b300ff, #d400ff);
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(139, 0, 221, 0.7);
     }
 
     .fortune-box {
@@ -231,17 +537,42 @@
 
     footer {
       text-align: center;
-      padding: 2rem 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      margin-top: 3rem;
-      font-size: 1rem;
-      color: #ccc;
+      padding: 2.5rem 1rem;
+      background: linear-gradient(135deg, rgba(139, 0, 212, 0.08), rgba(168, 85, 247, 0.05));
+      backdrop-filter: blur(15px);
+      margin-top: 4rem;
+      font-size: 1.1rem;
+      color: #f0e6ff;
+      border-top: 1px solid rgba(139, 0, 212, 0.3);
+      box-shadow: inset 0 0 25px rgba(139, 0, 212, 0.08);
+      text-shadow: 0 0 5px rgba(240, 230, 255, 0.2);
+    }
+
+    footer span {
+      color: #e8d5ff;
+      font-weight: bold;
+      text-shadow: 0 0 15px rgba(232, 213, 255, 0.5);
     }
 
     footer a {
-      color: #c086ff;
+      color: #c084fc;
       text-decoration: none;
       font-weight: bold;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      transition: all 0.4s ease;
+      background: rgba(139, 0, 212, 0.1);
+      border: 1px solid rgba(139, 0, 212, 0.3);
+      text-shadow: 0 0 5px rgba(192, 132, 252, 0.3);
+    }
+
+    footer a:hover {
+      color: #ffffff;
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+      text-decoration: none;
+      border-color: rgba(139, 92, 246, 0.6);
     }
 
     section {
@@ -258,31 +589,362 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(15, 0, 30, 0.96);
-      border: 2px solid #c086ff;
-      border-radius: 15px;
-      padding: 2rem;
+      background: linear-gradient(135deg, rgba(15, 0, 30, 0.96), rgba(40, 0, 60, 0.9));
+      border: 2px solid #8b5cf6;
+      border-radius: 25px;
+      padding: 2.5rem;
       width: 90%;
-      max-width: 400px;
+      max-width: 480px;
       color: #fff;
-      box-shadow: 0 0 25px rgba(180, 100, 255, 0.4);
+      box-shadow: 0 0 40px rgba(139, 92, 246, 0.5), inset 0 0 25px rgba(255, 255, 255, 0.05);
       z-index: 1000;
+      animation: modalSlideIn 0.4s ease-out;
+      backdrop-filter: blur(20px);
+    }
+
+    .cart-modal h3 {
+      text-align: center;
+      color: #e8d5ff;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 15px rgba(232, 213, 255, 0.6);
+    }
+
+    .cart-items {
+      margin: 1.5rem 0;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 0.8rem;
+    }
+
+    .cart-items::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .cart-items::-webkit-scrollbar-track {
+      background: rgba(139, 92, 246, 0.1);
+      border-radius: 12px;
+    }
+
+    .cart-items::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+      border-radius: 12px;
+      box-shadow: 0 0 5px rgba(139, 92, 246, 0.3);
+    }
+
+    .cart-item {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 12px;
+      margin-bottom: 0.8rem;
+      background: rgba(139, 92, 246, 0.05);
+      transition: all 0.3s ease;
+      text-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+    }
+
+    .cart-item:hover {
+      background: rgba(139, 92, 246, 0.12);
+      transform: translateX(8px);
+      box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+    }
+
+    .remove-btn {
+      background: linear-gradient(135deg, #ef4444, #f87171);
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 1.4rem;
+      transition: all 0.3s ease;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+    }
+
+    .remove-btn:hover {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      transform: scale(1.15);
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+    }
+
+    .close-cart {
+      display: block;
+      margin: 2rem auto 0;
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 18px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      font-weight: bold;
+      font-size: 1.2rem;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+    }
+
+    .close-cart:hover {
+      background: linear-gradient(135deg, #a78bfa, #c4b5fd);
+      transform: translateY(-4px);
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.7);
     }
 
     input {
       width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      border-radius: 8px;
-      border: none;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 15px;
+      border: 2px solid rgba(139, 92, 246, 0.4);
       outline: none;
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+    }
+
+    input:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+      background: rgba(139, 92, 246, 0.05);
     }
 
     .contacts-info {
       text-align: center;
-      margin-top: 1rem;
-      color: #ccc;
-      font-size: 0.95rem;
+      margin-top: 2rem;
+      color: #f0e6ff;
+      font-size: 1rem;
+      background: rgba(139, 92, 246, 0.08);
+      padding: 1.5rem;
+      border-radius: 15px;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      text-shadow: 0 0 3px rgba(240, 230, 255, 0.2);
+    }
+
+    /* === Мобильная адаптивность === */
+    @media (max-width: 768px) {
+      /* Header мобильный */
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      header div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        width: 100%;
+      }
+
+      .cart-btn, .back-btn {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        margin: 0;
+      }
+
+      /* Анимированные свечи мобильные */
+      .candles {
+        display: none; /* Отключаем свечи на мобильных для производительности */
+      }
+
+      /* Мигающие звездочки мобильные */
+      .twinkling-stars {
+        display: none; /* Отключаем звездочки на мобильных для производительности */
+      }
+
+      /* Парящие руны мобильные */
+      .floating-runes {
+        display: none; /* Отключаем руны на мобильных для производительности */
+      }
+
+      /* Эффект дыма мобильный */
+      .mystical-smoke {
+        display: none; /* Отключаем дым на мобильных для производительности */
+      }
+
+      /* Навигация мобильная */
+      nav {
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 1rem 0.5rem;
+        margin: 1rem 0;
+      }
+
+      nav a {
+        padding: 0.8rem 1rem;
+        text-align: center;
+        border-radius: 8px;
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.03);
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover {
+        background: rgba(193, 133, 255, 0.1);
+        color: #b36bff;
+        transform: translateY(-2px);
+      }
+
+      /* Основной контент мобильный */
+      main {
+        margin: 1rem 0.5rem;
+        padding: 1rem;
+        max-width: none;
+      }
+
+      /* Карточки гаданий мобильные */
+      .price-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .card {
+        padding: 1rem;
+        margin: 0;
+      }
+
+      .card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.3;
+      }
+
+      .card p {
+        font-size: 1.2rem;
+        margin: 0.6rem 0;
+        font-weight: bold;
+      }
+
+      .card button {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+      }
+
+      /* Специальный блок гадания дня мобильный */
+      .fortune-box {
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .fortune-text {
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        line-height: 1.5;
+      }
+
+      /* Модальное окно мобильное */
+      .cart-modal {
+        width: 95%;
+        max-width: none;
+        margin: 1rem;
+        padding: 2rem;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: modalSlideIn 0.4s ease-out;
+      }
+
+      .cart-items {
+        max-height: 200px;
+      }
+
+      .remove-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1.2rem;
+      }
+
+      /* Типографика мобильная */
+      h2 {
+        font-size: 1.6rem;
+        margin-top: 2.5rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+        line-height: 1.7rem;
+      }
+
+      /* Footer мобильный */
+      footer {
+        margin-top: 3rem;
+        padding: 2rem 1rem;
+        font-size: 1rem;
+      }
+    }
+
+    /* Маленькие экраны */
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.3rem;
+      }
+
+      .cart-btn, .back-btn {
+        padding: 0.7rem;
+        font-size: 0.85rem;
+      }
+
+      nav a {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+      }
+
+      .card {
+        padding: 0.8rem;
+      }
+
+      .card h3 {
+        font-size: 1rem;
+        line-height: 1.2;
+      }
+
+      .card p {
+        font-size: 1.1rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      p {
+        font-size: 0.95rem;
+        line-height: 1.5rem;
+      }
+
+      .cart-modal {
+        padding: 1.5rem;
+        margin: 0.8rem;
+      }
+
+      footer {
+        padding: 1.5rem 0.8rem;
+        font-size: 0.9rem;
+      }
+
+      .fortune-box {
+        padding: 1.2rem;
+      }
+
+      .fortune-text {
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
@@ -294,6 +956,36 @@
     <div class="candle" style="left:40%;"><div class="flame"></div></div>
     <div class="candle" style="left:70%;"><div class="flame"></div></div>
     <div class="candle" style="left:90%;"><div class="flame"></div></div>
+  </div>
+
+  <!-- Мигающие звездочки для таинственности -->
+  <div class="twinkling-stars">
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+  </div>
+
+  <!-- Парящие руны для мистической атмосферы -->
+  <div class="floating-runes">
+    <div class="rune">ᚱ</div>
+    <div class="rune">ᚾ</div>
+    <div class="rune">ᛁ</div>
+    <div class="rune">ᚨ</div>
+    <div class="rune">ᛊ</div>
+  </div>
+
+  <!-- Эффект дыма для атмосферы таинственности -->
+  <div class="mystical-smoke">
+    <div class="smoke-cloud"></div>
+    <div class="smoke-cloud"></div>
+    <div class="smoke-cloud"></div>
   </div>
 
   <header>
@@ -443,7 +1135,7 @@
     <section id="contacts">
       <h2>Контакты</h2>
       <div class="contacts-info">
-        ✉️ <a href="https://t.me/vikacat05" target="_blank">@vikacat05 - Telegram</a><br>
+        ✉️ Telegram: <b><a href="https://t.me/vikacat05" style="color: #00e1ff;">@vikacat05</a></b><br>
         💬 Discord: <b>mamkis</b><br><br>
         Сделайте скрин заказа и отправьте его — гадание придёт в течение 12 часов.
       </div>
@@ -463,7 +1155,7 @@
     <label>Имя в игре:</label>
     <input type="text" id="gameName" placeholder="Введите имя в игре">
     <div class="contacts-info">
-      <a href="https://t.me/vikacat05" target="_blank">@vikacat05 - Telegram</a><br>
+      <a href="https://t.me/vikacat05" style="color: #00e1ff;">@vikacat05</a> — Telegram<br>
       mamkis — Discord<br><br>
       Сделайте скриншот заказа и отправьте по этим контактам.
     </div>
@@ -532,5 +1224,3 @@
   </script>
 </body>
 </html>
-
-
