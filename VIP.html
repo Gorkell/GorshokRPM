@@ -76,6 +76,168 @@
       animation-duration: 22s;
     }
 
+    .floating-orb:nth-child(5) {
+      width: 60px;
+      height: 60px;
+      top: 30%;
+      right: 40%;
+      animation-duration: 28s;
+      background: radial-gradient(circle, rgba(255, 20, 147, 0.4), rgba(255, 20, 147, 0.1), transparent);
+    }
+
+    .floating-orb:nth-child(6) {
+      width: 90px;
+      height: 90px;
+      bottom: 40%;
+      right: 20%;
+      animation-duration: 20s;
+      background: radial-gradient(circle, rgba(255, 77, 216, 0.3), rgba(255, 77, 216, 0.1), transparent);
+    }
+
+    .floating-orb:nth-child(7) {
+      width: 70px;
+      height: 70px;
+      top: 70%;
+      left: 20%;
+      animation-duration: 25s;
+      background: radial-gradient(circle, rgba(219, 39, 119, 0.3), rgba(219, 39, 119, 0.1), transparent);
+    }
+
+    .floating-orb:nth-child(8) {
+      width: 110px;
+      height: 110px;
+      top: 15%;
+      right: 60%;
+      animation-duration: 18s;
+      background: radial-gradient(circle, rgba(255, 20, 147, 0.2), rgba(255, 20, 147, 0.05), transparent);
+    }
+
+    /* Тематические плавающие элементы */
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255, 77, 216, 0.3);
+      font-size: 2rem;
+      animation: floatHeart 15s infinite linear;
+    }
+
+    .heart:nth-child(1) {
+      top: 20%;
+      left: 15%;
+      animation-delay: 0s;
+    }
+
+    .heart:nth-child(2) {
+      top: 60%;
+      right: 20%;
+      animation-delay: 3s;
+    }
+
+    .heart:nth-child(3) {
+      top: 40%;
+      left: 80%;
+      animation-delay: 6s;
+    }
+
+    .heart:nth-child(4) {
+      bottom: 30%;
+      left: 70%;
+      animation-delay: 9s;
+    }
+
+    .heart:nth-child(5) {
+      top: 80%;
+      right: 40%;
+      animation-delay: 12s;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(0px) rotate(0deg) scale(0.8);
+        opacity: 0.3;
+      }
+      25% {
+        transform: translateY(-30px) rotate(90deg) scale(1.2);
+        opacity: 0.6;
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg) scale(0.9);
+        opacity: 0.4;
+      }
+      75% {
+        transform: translateY(-40px) rotate(270deg) scale(1.1);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(0px) rotate(360deg) scale(0.8);
+        opacity: 0.3;
+      }
+    }
+
+    /* Романтические звезды */
+    .floating-stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      color: rgba(255, 215, 0, 0.4);
+      font-size: 1.5rem;
+      animation: twinkle 8s infinite ease-in-out;
+    }
+
+    .star:nth-child(1) {
+      top: 25%;
+      left: 25%;
+      animation-delay: 0s;
+    }
+
+    .star:nth-child(2) {
+      top: 75%;
+      right: 25%;
+      animation-delay: 2s;
+    }
+
+    .star:nth-child(3) {
+      top: 50%;
+      left: 90%;
+      animation-delay: 4s;
+    }
+
+    .star:nth-child(4) {
+      bottom: 25%;
+      left: 10%;
+      animation-delay: 6s;
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8) rotate(0deg);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.2) rotate(180deg);
+      }
+    }
+
     @keyframes float {
       0% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
       25% { transform: translateY(-20px) rotate(90deg); opacity: 0.6; }
@@ -211,6 +373,9 @@
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
       margin-top: 2rem;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .card {
@@ -676,6 +841,32 @@
 </head>
 <body>
 
+  <div class="floating-bg">
+    <div class="floating-orb"></div>
+    <div class="floating-orb"></div>
+    <div class="floating-orb"></div>
+    <div class="floating-orb"></div>
+    <div class="floating-orb"></div>
+    <div class="floating-orb"></div>
+    <div class="floating-orb"></div>
+    <div class="floating-orb"></div>
+  </div>
+
+  <div class="floating-hearts">
+    <div class="heart">❤</div>
+    <div class="heart">💖</div>
+    <div class="heart">💕</div>
+    <div class="heart">💗</div>
+    <div class="heart">💓</div>
+  </div>
+
+  <div class="floating-stars">
+    <div class="star">✨</div>
+    <div class="star">⭐</div>
+    <div class="star">🌟</div>
+    <div class="star">💫</div>
+  </div>
+
   <header>
     <h1>Gorshok Club</h1>
     <div>
@@ -694,8 +885,8 @@
     <section id="desc" class="active">
       <h2>Что на сайте</h2>
       <p>Gorshok Club — цифровое пространство развлечений в RP мире. Мы предлагаем уникальные сценарии и приват-услуги, где каждый клиент получает исключительную заботу и полную конфиденциальность.
- 🎭 Эксклюзивные RP-сценарии с возможностью кастомизации под ваши желания
- 🧩 Приват-услуги, адаптированные под любые запросы и фантазии 
+🎭 Эксклюзивные RP-сценарии с возможностью кастомизации под ваши желания
+🧩 Приват-услуги, адаптированные под любые запросы и фантазии 
 
 🔒 Абсолютная анонимность и безопасность 
 ⚡ Быстрая связь и поддержка через Discord и Telegram 
@@ -764,6 +955,36 @@
           <h3>🧍‍♀️🛏️🧍‍♂️ночь со всеми радостями (23:00 - 2:00)</h3>
           <p>120 000$</p>
           <button onclick="addToCart('ночь со всеми радостями', '120 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>💋 Поцелуи и ласки</h3>
+          <p>15 000$</p>
+          <button onclick="addToCart('Поцелуи и ласки', '10 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>👐 Массаж всего тела</h3>
+          <p>35 000$</p>
+          <button onclick="addToCart('Массаж всего тела', '35 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>👗 Стриптиз шоу</h3>
+          <p>40 000$</p>
+          <button onclick="addToCart('Стриптиз шоу', '40 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>🎪 Ролевые игры (медсестра, учительница, горничная)</h3>
+          <p>от 55 000$</p>
+          <button onclick="addToCart('Ролевые игры', '55 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>🛁 Совместный душ</h3>
+          <p>35 000$</p>
+          <button onclick="addToCart('Совместный душ', '30 000$')">Выбрать</button>
+        </div>
+        <div class="card">
+          <h3>🌙 Романтический ужин при свечах</h3>
+          <p>45 000$</p>
+          <button onclick="addToCart('Романтический ужин', '45 000$')">Выбрать</button>
         </div>
       </div>
     </section>
