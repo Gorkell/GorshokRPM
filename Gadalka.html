@@ -999,7 +999,6 @@
   <nav>
     <a href="#" class="active" onclick="showSection('desc', this)">Описание</a>
     <a href="#" onclick="showSection('price', this)">Гадания</a>
-    <a href="#" onclick="showSection('daily', this)">Гадание дня</a>
     <a href="#" onclick="showSection('contacts', this)">Контакты</a>
   </nav>
 
@@ -1123,15 +1122,6 @@
       </div>
     </section>
 
-    <section id="daily">
-      <h2>Гадание дня</h2>
-      <div class="fortune-box">
-        <p>Нажми, чтобы узнать, что ждёт тебя сегодня...</p>
-        <button class="back-btn" onclick="showFortune()">🔮 Получить предсказание</button>
-        <div class="fortune-text" id="fortuneText"></div>
-      </div>
-    </section>
-
     <section id="contacts">
       <h2>Контакты</h2>
       <div class="contacts-info">
@@ -1202,24 +1192,6 @@
     function toggleCart() {
       const modal = document.getElementById('cartModal');
       modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-    }
-
-    const fortunes = [
-      "Сегодня удача заглянет к тебе — не прогони её.",
-      "Пламя свечи зовёт перемены. Готов ли ты?",
-      "Не доверяй первым мыслям — истина во втором взгляде.",
-      "Скоро ты услышишь то, чего ждал очень давно.",
-      "Тьма улыбается тебе... но это не всегда плохо.",
-      "Судьба готовит подарок. Но он может быть с зубами.",
-      "Кто-то вспомнит о тебе — и это изменит многое.",
-      "Не ищи ответы сегодня. Пусть они сами найдут тебя.",
-      "Обернись. Иногда прошлое ещё идёт за тобой.",
-      "Ты ближе к своей цели, чем думаешь. Остался один шаг."
-    ];
-
-    function showFortune() {
-      const fortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-      document.getElementById('fortuneText').textContent = fortune;
     }
   </script>
 </body>
