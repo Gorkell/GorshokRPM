@@ -68,47 +68,67 @@
 
     /* Профессиональный header */
     header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
       background: linear-gradient(135deg,
-        rgba(15, 12, 41, 0.95) 0%,
-        rgba(48, 43, 99, 0.95) 50%,
-        rgba(36, 36, 62, 0.95) 100%);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
-      padding: 1.5rem 2rem;
+        rgba(102, 126, 234, 0.1) 0%,
+        rgba(118, 75, 162, 0.05) 100%);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
       position: sticky;
       top: 0;
       z-index: 1000;
-      animation: headerSlideIn 0.8s ease-out;
-    }
-
-    @keyframes headerSlideIn {
-      from {
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+      border-bottom: 1px solid rgba(102, 126, 234, 0.2);
     }
 
     header h1 {
-      background: var(--primary-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-size: 2.5rem;
-      font-weight: 800;
+      color: #667eea;
+      font-size: 1.8rem;
       margin: 0;
-      text-align: center;
-      letter-spacing: -0.02em;
-      animation: titleGlow 2s ease-in-out infinite alternate;
+      text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
     }
 
-    @keyframes titleGlow {
-      from { filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.3)); }
-      to { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.6)); }
+    .header-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .home-link {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 15px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .home-link:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 0 25px rgba(102, 126, 234, 0.5);
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+
+    .login-btn {
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
+    }
+
+    .login-btn:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 0 25px rgba(79, 172, 254, 0.5);
+      background: linear-gradient(135deg, #00f2fe, #4facfe);
     }
 
     /* Навигация */
@@ -649,12 +669,34 @@
     }
 
     @media (max-width: 768px) {
+      /* Header мобильный */
       header {
+        flex-direction: column;
+        gap: 1rem;
         padding: 1rem;
+        text-align: center;
       }
 
       header h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .header-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .home-link {
+        width: auto;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .login-btn {
+        width: auto;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
       }
 
       nav {
@@ -727,11 +769,12 @@
 
     @media (max-width: 480px) {
       header h1 {
-        font-size: 1.6rem;
+        font-size: 1.3rem;
       }
 
-      h2 {
-        font-size: 1.8rem;
+      .home-link, .login-btn {
+        padding: 0.7rem;
+        font-size: 0.85rem;
       }
 
       .news-filters {
@@ -947,16 +990,6 @@
   </style>
 </head>
 <body>
-  <!-- Кнопка возврата на главную -->
-  <div class="home-button">
-    <a href="index.html" class="home-link">← Вернуться на главную</a>
-  </div>
-
-  <!-- Логин панель -->
-  <div class="login-panel" id="login-panel">
-    <button class="login-btn" onclick="showLoginModal()">Login</button>
-  </div>
-
   <!-- Модальное окно логина -->
   <div class="login-modal" id="loginModal">
     <div class="login-content">
@@ -972,6 +1005,10 @@
 
   <header>
     <h1>Rein Family</h1>
+    <div class="header-buttons">
+      <a href="index.html" class="home-link">← Вернуться на главную</a>
+      <button class="login-btn" onclick="showLoginModal()">Login</button>
+    </div>
   </header>
 
   <nav>
@@ -1184,7 +1221,12 @@
       window.currentUserName = null;
       document.getElementById('adminPanel').style.display = 'none';
       document.getElementById('deleteControls').style.display = 'none';
-      document.getElementById('login-panel').style.display = 'block';
+
+      // Показываем кнопку Login в header
+      const loginBtn = document.querySelector('.header-buttons .login-btn');
+      if (loginBtn) {
+        loginBtn.style.display = 'block';
+      }
 
       // Очищаем сессию из sessionStorage
       sessionStorage.removeItem('rein_user_session');
@@ -1222,6 +1264,12 @@
               document.getElementById('deleteControls').style.display = 'none';
             }
 
+            // Скрываем кнопку Login в header
+            const loginBtn = document.querySelector('.header-buttons .login-btn');
+            if (loginBtn) {
+              loginBtn.style.display = 'none';
+            }
+
             // Заполняем поле имени в модальном окне
             if (document.getElementById('userName')) {
               document.getElementById('userName').value = session.name;
@@ -1237,11 +1285,21 @@
         } catch (e) {
           console.error('Ошибка восстановления сессии:', e);
           sessionStorage.removeItem('rein_user_session');
-          document.getElementById('login-panel').style.display = 'block';
+
+          // Показываем кнопку Login в header по умолчанию
+          const loginBtn = document.querySelector('.header-buttons .login-btn');
+          if (loginBtn) {
+            loginBtn.style.display = 'block';
+          }
         }
       } else {
         console.log('Сессия не найдена в sessionStorage');
-        document.getElementById('login-panel').style.display = 'block';
+
+        // Показываем кнопку Login в header по умолчанию
+        const loginBtn = document.querySelector('.header-buttons .login-btn');
+        if (loginBtn) {
+          loginBtn.style.display = 'block';
+        }
       }
     }
 
@@ -1450,6 +1508,13 @@
         document.getElementById('adminPanel').style.display = 'block';
         document.getElementById('deleteControls').style.display = 'block';
         document.getElementById('login-panel').style.display = 'none';
+
+        // Скрываем кнопку Login в header
+        const loginBtn = document.querySelector('.header-buttons .login-btn');
+        if (loginBtn) {
+          loginBtn.style.display = 'none';
+        }
+
         document.getElementById('adminPassword').value = '';
 
         // Сохраняем сессию в sessionStorage
@@ -1467,6 +1532,13 @@
         document.getElementById('adminPanel').style.display = 'block';
         document.getElementById('deleteControls').style.display = 'none';
         document.getElementById('login-panel').style.display = 'none';
+
+        // Скрываем кнопку Login в header
+        const loginBtn = document.querySelector('.header-buttons .login-btn');
+        if (loginBtn) {
+          loginBtn.style.display = 'none';
+        }
+
         document.getElementById('adminPassword').value = '';
 
         // Сохраняем сессию в sessionStorage
