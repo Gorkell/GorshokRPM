@@ -131,6 +131,40 @@
       background: linear-gradient(135deg, #00f2fe, #4facfe);
     }
 
+    /* Footer */
+    footer {
+      text-align: center;
+      color: #c0c7ff;
+      margin-top: 3rem;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer span {
+      color: #4facfe;
+      font-weight: bold;
+    }
+
+    .contact-link {
+      color: #4facfe;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: 1px solid #4facfe;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .contact-link:hover {
+      color: #00f2fe;
+      border-color: #00f2fe;
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
+    }
+
     /* Навигация */
     nav {
       display: flex;
@@ -767,6 +801,204 @@
       }
     }
 
+    @media (max-width: 768px) {
+      /* Header мобильный */
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .header-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .home-link {
+        width: auto;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .login-btn {
+        width: auto;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      main {
+        margin: 1rem;
+        padding: 0;
+      }
+
+      section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .application-form,
+      .contacts-section,
+      .news-section {
+        padding: 1.5rem;
+      }
+
+      .form-group input {
+        padding: 0.8rem;
+      }
+
+      .submit-btn {
+        padding: 0.8rem 2rem;
+      }
+
+      .login-panel {
+        top: 65px;
+        right: 5px;
+      }
+
+      .login-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .login-content {
+        margin: 1rem;
+        padding: 2rem;
+        min-width: auto;
+        width: calc(100% - 2rem);
+      }
+
+      .family-description {
+        padding: 1rem;
+      }
+
+      .family-description h2 {
+        font-size: 1.8rem;
+      }
+
+      .intro-text,
+      .main-text {
+        font-size: 1rem;
+      }
+
+      .values-section h3,
+      .family-section h3,
+      .journey-section h3,
+      .welcome-section h3 {
+        font-size: 1.2rem;
+      }
+
+      /* Footer mobile */
+      footer {
+        margin-top: 2rem;
+        padding: 1.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.3rem;
+      }
+
+      .home-link, .login-btn {
+        padding: 0.7rem;
+        font-size: 0.85rem;
+      }
+
+      .news-filters {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+      }
+
+      .filter-group {
+        width: 100%;
+      }
+
+      .news-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      }
+
+      .delete-btn {
+        align-self: flex-end;
+        margin-top: 0.5rem;
+      }
+
+      .family-description {
+        padding: 0.8rem;
+      }
+
+      .family-description h2 {
+        font-size: 1.5rem;
+      }
+
+      .intro-text,
+      .main-text {
+        font-size: 0.9rem;
+      }
+
+      .values-section,
+      .family-section,
+      .journey-section,
+      .welcome-section {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .values-section h3,
+      .family-section h3,
+      .journey-section h3,
+      .welcome-section h3 {
+        font-size: 1.1rem;
+      }
+
+      .values-section p,
+      .family-section p,
+      .journey-section p {
+        font-size: 0.9rem;
+      }
+
+      .welcome-text {
+        font-size: 1rem !important;
+      }
+
+      .welcome-text strong {
+        font-size: 1.1rem;
+      }
+
+      .home-button {
+        top: 20px;
+        left: 15px;
+      }
+
+      .home-link {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+      }
+
+      /* Footer for very small screens */
+      footer {
+        margin-top: 1.5rem;
+        padding: 0.8rem 0.3rem;
+        font-size: 0.85rem;
+        line-height: 1.4;
+      }
+    }
+
     @media (max-width: 480px) {
       header h1 {
         font-size: 1.3rem;
@@ -1145,7 +1377,8 @@
   </main>
 
   <footer>
-    <p>&copy; 2024 Rein. Все права защищены.</p>
+    За отдельную плату вы можете <span>арендовать страницу на нашем сайте!</span><br><br>
+    <a href="contacts.html" class="contact-link">Связаться с нами</a>
   </footer>
 
   <!-- Firebase SDK -->
