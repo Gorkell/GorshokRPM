@@ -462,6 +462,29 @@
       box-shadow: 0 0 20px rgba(255, 77, 216, 0.5);
     }
 
+    /* Эффект выбора товара */
+    .card.selected {
+      animation: selectGlow 0.6s ease-in-out;
+      background: linear-gradient(135deg, rgba(255, 77, 216, 0.1), rgba(230, 0, 180, 0.05));
+      border: 2px solid #ff4fd8;
+      box-shadow: 0 0 30px rgba(255, 77, 216, 0.4);
+    }
+
+    @keyframes selectGlow {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 77, 216, 0.2);
+      }
+      50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 40px rgba(255, 77, 216, 0.6);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(255, 77, 216, 0.4);
+      }
+    }
+
     footer {
       text-align: center;
       padding: 2rem 1rem;
@@ -1036,6 +1059,19 @@
     let cart = [];
 
     function addToCart(name, price) {
+      // Получаем карточку товара (родитель кнопки)
+      const button = event.target;
+      const card = button.closest('.card');
+
+      // Добавляем эффект выбора
+      card.classList.add('selected');
+
+      // Убираем эффект через 0.6 секунды (длина анимации)
+      setTimeout(() => {
+        card.classList.remove('selected');
+      }, 600);
+
+      // Добавляем товар в корзину
       cart.push({ name, price });
       updateCart();
     }
