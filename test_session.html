@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест сессии - Rein</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a2e;
+            color: #fff;
+        }
+        .test-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .test-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Тест системы сессии</h1>
+
+    <div class="test-info">
+        <h3>Статус сессии:</h3>
+        <p id="sessionStatus">Проверяем...</p>
+    </div>
+
+    <button class="test-button" onclick="testSessionStorage()">Протестировать sessionStorage</button>
+    <button class="test-button" onclick="testLocalStorage()">Протестировать localStorage</button>
+    <button class="test-button" onclick="clearStorage()">Очистить хранилище</button>
+    <button class="test-button" onclick="refreshPage()">Обновить страницу</button>
+
+    <script>
+        function updateSessionStatus() {
+            const sessionStorageData = sessionStorage.getItem('rein_user_session');
+            const localStorageData = localStorage.getItem('rein_user_session');
+
+            let status = '';
+
+            if (sessionStorageData) {
+                try {
+                    const session = JSON.parse(sessionStorageData);
+                    status += `<strong>sessionStorage:</strong> Найдена сессия для ${session.role} (${session.name})<br>`;
+                } catch (e) {
+                    status += `<strong>sessionStorage:</strong> Ошибка парсинга данных<br>`;
+                }
+            } else {
+                status += `<strong>sessionStorage:</strong> Сессия не найдена<br>`;
+            }
+
+            if (localStorageData) {
+                try {
+                    const session = JSON.parse(localStorageData);
+                    status += `<strong>localStorage:</strong> Найдена сессия для ${session.role} (${session.name})<br>`;
+                } catch (e) {
+                    status += `<strong>localStorage:</strong> Ошибка парсинга данных<br>`;
+                }
+            } else {
+                status += `<strong>localStorage:</strong> Сессия не найдена<br>`;
+            }
+
+            document.getElementById('sessionStatus').innerHTML = status;
+        }
+
+        function testSessionStorage() {
+            const testData = {
+                role: 'test',
+                name: 'Тестовый пользователь',
+                timestamp: Date.now()
+            };
+
+            sessionStorage.setItem('rein_user_session', JSON.stringify(testData));
+            alert('Данные сохранены в sessionStorage');
+            updateSessionStatus();
+        }
+
+        function testLocalStorage() {
+            const testData = {
+                role: 'test',
+                name: 'Тестовый пользователь',
+                timestamp: Date.now()
+            };
+
+            localStorage.setItem('rein_user_session', JSON.stringify(testData));
+            alert('Данные сохранены в localStorage');
+            updateSessionStatus();
+        }
+
+        function clearStorage() {
+            sessionStorage.removeItem('rein_user_session');
+            localStorage.removeItem('rein_user_session');
+            alert('Хранилище очищено');
+            updateSessionStatus();
+        }
+
+        function refreshPage() {
+            location.reload();
+        }
+
+        // Инициализация
+        updateSessionStatus();
+    </script>
+</body>
+</html>
