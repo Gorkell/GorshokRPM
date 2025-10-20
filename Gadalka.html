@@ -311,11 +311,13 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.2rem 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      box-shadow: 0 0 20px rgba(193, 133, 255, 0.3);
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(25px);
+      box-shadow: 0 0 30px rgba(193, 133, 255, 0.5);
       position: sticky;
       top: 0;
       z-index: 10;
+      border-bottom: 1px solid rgba(193, 133, 255, 0.3);
     }
 
     header h1 {
@@ -335,12 +337,27 @@
       font-weight: bold;
       transition: all 0.4s ease;
       box-shadow: 0 0 20px rgba(139, 0, 212, 0.4);
+      position: relative;
     }
 
     .back-btn:hover {
       transform: scale(1.08) translateY(-3px);
       box-shadow: 0 0 30px rgba(139, 0, 212, 0.7);
       background: linear-gradient(135deg, #a855f7, #c084fc, #ddd6fe);
+    }
+
+    /* Эффект убегания от мыши */
+    .back-btn.elusive {
+      position: fixed !important;
+      z-index: 1000;
+      pointer-events: none;
+      animation: elusiveEscape 0.5s ease-in-out;
+    }
+
+    @keyframes elusiveEscape {
+      0% { transform: scale(1) rotate(0deg); opacity: 1; }
+      50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+      100% { transform: scale(0.8) rotate(360deg); opacity: 0; }
     }
 
     .cart-btn {
@@ -513,9 +530,32 @@
     }
 
     .card button:hover {
-      background: linear-gradient(135deg, #b300ff, #d400ff);
-      transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(139, 0, 221, 0.7);
+      background: linear-gradient(135deg, #b36bff, #8b5cf6);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(179, 107, 255, 0.5);
+    }
+
+    /* Эффект выбора товара */
+    .card.selected {
+      animation: selectGlow 0.6s ease-in-out;
+      background: linear-gradient(135deg, rgba(179, 107, 255, 0.1), rgba(139, 92, 246, 0.05));
+      border: 2px solid #b36bff;
+      box-shadow: 0 0 30px rgba(179, 107, 255, 0.4);
+    }
+
+    @keyframes selectGlow {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(179, 107, 255, 0.2);
+      }
+      50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 40px rgba(179, 107, 255, 0.6);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(179, 107, 255, 0.4);
+      }
     }
 
     .fortune-box {
@@ -595,11 +635,13 @@
       padding: 2.5rem;
       width: 90%;
       max-width: 480px;
+      max-height: 90vh; /* Максимальная высота - 90% от viewport */
       color: #fff;
       box-shadow: 0 0 40px rgba(139, 92, 246, 0.5), inset 0 0 25px rgba(255, 255, 255, 0.05);
       z-index: 1000;
       animation: modalSlideIn 0.4s ease-out;
       backdrop-filter: blur(20px);
+      overflow-y: auto; /* Добавляем прокрутку */
     }
 
     .cart-modal h3 {
@@ -608,6 +650,12 @@
       font-size: 1.8rem;
       margin-bottom: 2rem;
       text-shadow: 0 0 15px rgba(232, 213, 255, 0.6);
+    }
+
+    .cart-content {
+      max-height: calc(90vh - 150px); /* Оставляем место для заголовка и кнопки */
+      overflow-y: auto;
+      padding-right: 0.8rem;
     }
 
     .cart-items {
@@ -686,6 +734,9 @@
       font-weight: bold;
       font-size: 1.2rem;
       box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+      position: sticky;
+      bottom: 0;
+      margin-top: auto;
     }
 
     .close-cart:hover {
@@ -714,16 +765,61 @@
       background: rgba(139, 92, 246, 0.05);
     }
 
-    .contacts-info {
-      text-align: center;
-      margin-top: 2rem;
-      color: #f0e6ff;
-      font-size: 1rem;
-      background: rgba(139, 92, 246, 0.08);
-      padding: 1.5rem;
+    /* Раздел Соглашение */
+    .agreement-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+      background: rgba(139, 92, 246, 0.1);
+      padding: 2rem;
       border-radius: 15px;
       border: 1px solid rgba(139, 92, 246, 0.3);
-      text-shadow: 0 0 3px rgba(240, 230, 255, 0.2);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+    }
+
+    .agreement-content h3 {
+      color: #c086ff;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      text-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+    }
+
+    .agreement-content h4 {
+      color: #d4b3ff;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+    }
+
+    .agreement-content p {
+      color: #e8d5ff;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .agreement-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .agreement-list li {
+      color: #f0e6ff;
+      padding: 0.6rem 0;
+      font-size: 1rem;
+      border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+      line-height: 1.5;
+    }
+
+    .agreement-list li:last-child {
+      border-bottom: none;
+    }
+
+    .agreement-content em {
+      font-style: italic;
+      color: #e6ccff;
     }
 
     /* === Мобильная адаптивность === */
@@ -861,8 +957,12 @@
         animation: modalSlideIn 0.4s ease-out;
       }
 
+      .cart-content {
+        max-height: calc(90vh - 120px);
+      }
+
       .cart-items {
-        max-height: 200px;
+        max-height: 150px;
       }
 
       .remove-btn {
@@ -880,6 +980,31 @@
       p {
         font-size: 1.1rem;
         line-height: 1.7rem;
+      }
+
+      /* Agreement mobile */
+      .agreement-content {
+        padding: 1.5rem;
+        margin: 0 0.5rem;
+      }
+
+      .agreement-content h3 {
+        font-size: 1.2rem;
+        margin-top: 1.5rem;
+      }
+
+      .agreement-content h4 {
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+      }
+
+      .agreement-content p {
+        font-size: 0.95rem;
+      }
+
+      .agreement-list li {
+        font-size: 0.95rem;
+        padding: 0.5rem 0;
       }
 
       /* Footer мобильный */
@@ -928,9 +1053,38 @@
         line-height: 1.5rem;
       }
 
+      /* Agreement for very small screens */
+      .agreement-content {
+        padding: 1.2rem;
+        margin: 0 0.3rem;
+      }
+
+      .agreement-content h3 {
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+      }
+
+      .agreement-content h4 {
+        font-size: 1rem;
+        margin-top: 1rem;
+      }
+
+      .agreement-content p {
+        font-size: 0.9rem;
+      }
+
+      .agreement-list li {
+        font-size: 0.9rem;
+        padding: 0.4rem 0;
+      }
+
       .cart-modal {
         padding: 1.5rem;
         margin: 0.8rem;
+      }
+
+      .cart-content {
+        max-height: calc(90vh - 100px);
       }
 
       footer {
@@ -1000,6 +1154,7 @@
     <a href="#" class="active" onclick="showSection('desc', this)">Описание</a>
     <a href="#" onclick="showSection('price', this)">Гадания</a>
     <a href="#" onclick="showSection('contacts', this)">Контакты</a>
+    <a href="#" onclick="showSection('agreement', this)">Соглашение</a>
   </nav>
 
   <main>
@@ -1130,6 +1285,107 @@
         Сделайте скрин заказа и отправьте его — гадание придёт в течение 12 часов.
       </div>
     </section>
+
+    <!-- Раздел Соглашение -->
+    <section id="agreement">
+      <h2>Пользовательское соглашение</h2>
+      <div class="agreement-content">
+        <h3>1. Общие положения</h3>
+        <p>Настоящее Пользовательское соглашение (далее — «Соглашение») регулирует отношения между Gorshok Studio (далее — «Студия») и пользователем сайта (далее — «Пользователь») при использовании мистических услуг гадания.</p>
+        <p>Сайт гадалки предназначен исключительно для развлекательных и игровых целей в RP мире и не является коммерческим проектом. Все расчёты и взаимодействия осуществляются только с использованием игровой валюты RPM, которая не имеет реальной денежной стоимости и не может быть обменена на реальные деньги или иные материальные ценности.</p>
+
+        <h3>2. Термины и определения</h3>
+        <ul class="agreement-list">
+          <li><strong>Студия</strong> — Gorshok Studio, предоставляющая мистические услуги гадания и предсказаний.</li>
+          <li><strong>Пользователь</strong> — физическое или юридическое лицо, использующее услуги Студии.</li>
+          <li><strong>Услуги</strong> — гадания, предсказания и другие мистические сервисы в игровом мире.</li>
+          <li><strong>Игровая валюта RPM</strong> — валюта игрового сервера, используемая исключительно для внутриигровых расчётов.</li>
+          <li><strong>Сайт</strong> — веб-ресурс гадалки gorshok-studio.com.</li>
+        </ul>
+
+        <h3>3. Права и обязанности Пользователя</h3>
+        <h4>Пользователь имеет право:</h4>
+        <ul class="agreement-list">
+          <li>Использовать услуги гадания в соответствии с настоящим Соглашением;</li>
+          <li>Получать консультации по вопросам использования услуг;</li>
+          <li>Требовать соблюдения сроков выполнения заказов;</li>
+          <li>Получать обновления и уточнения гаданий.</li>
+        </ul>
+
+        <h4>Пользователь обязуется:</h4>
+        <ul class="agreement-list">
+          <li>Предоставлять достоверную информацию при оформлении заказов;</li>
+          <li>Своевременно оплачивать услуги в игровой валюте RPM;</li>
+          <li>Не использовать услуги во вред другим пользователям или серверам;</li>
+          <li>Соблюдать правила игрового сервера;</li>
+          <li>Не распространять вредоносное ПО и не заниматься противоправной деятельностью.</li>
+        </ul>
+
+        <h3>4. Права и обязанности Студии</h3>
+        <h4>Студия имеет право:</h4>
+        <ul class="agreement-list">
+          <li>Изменять условия и стоимость услуг с предварительным уведомлением Пользователя;</li>
+          <li>Временно приостанавливать доступ к услугам для проведения технических работ;</li>
+          <li>Отказать в предоставлении услуг при нарушении Пользователем настоящего Соглашения;</li>
+          <li>Использовать отзывы и примеры работ в портфолио (с согласия Пользователя).</li>
+        </ul>
+
+        <h4>Студия обязуется:</h4>
+        <ul class="agreement-list">
+          <li>Предоставлять услуги в соответствии с заявленными характеристиками;</li>
+          <li>Обеспечивать конфиденциальность данных Пользователя;</li>
+          <li>Выполнять заказы в согласованные сроки;</li>
+          <li>Предоставлять консультационную поддержку;</li>
+          <li>Обеспечивать стабильную работу сервисов.</li>
+        </ul>
+
+        <h3>5. Ограничения использования</h3>
+        <p>Пользователю запрещается:</p>
+        <ul class="agreement-list">
+          <li>Использовать услуги для незаконных целей;</li>
+          <li>Размещать или распространять вредоносный или неуместный контент;</li>
+          <li>Отправлять спам и нежелательную рекламу;</li>
+          <li>Пытаться получить несанкционированный доступ к системам Студии;</li>
+          <li>Передавать учётные данные третьим лицам без согласия Студии.</li>
+        </ul>
+
+        <h3>6. Не коммерческий характер услуг</h3>
+        <p>Сайт и деятельность Студии не направлены на получение прибыли и не являются средством заработка.</p>
+        <p>Все услуги предоставляются исключительно за игровую валюту RPM, не имеющую реальной экономической стоимости.</p>
+        <p>Студия не осуществляет продажу товаров, услуг или цифрового контента за реальные деньги.</p>
+        <p>Любые операции с игровой валютой RPM за пределами игровых проектов не поддерживаются и не признаются Студией.</p>
+
+        <h3>7. Политика конфиденциальности</h3>
+        <p>Студия обязуется не разглашать персональные данные Пользователя третьим лицам, за исключением случаев, предусмотренных законодательством.</p>
+        <p>Собираемая информация используется исключительно для предоставления услуг, связи с Пользователем и улучшения качества сервиса.</p>
+
+        <h3>8. Ограничение ответственности</h3>
+        <p>Студия не несёт ответственности за:</p>
+        <ul class="agreement-list">
+          <li>Косвенные убытки, вызванные использованием услуг;</li>
+          <li>Потерю данных по вине Пользователя;</li>
+          <li>Временные технические перебои или профилактические работы;</li>
+          <li>Действия третьих лиц, повлёкшие сбои или утрату данных;</li>
+          <li>Использование услуг в нарушение настоящего Соглашения.</li>
+        </ul>
+
+        <h3>9. Изменения соглашения</h3>
+        <p>Студия оставляет за собой право изменять условия настоящего Соглашения.</p>
+        <p>Пользователи будут уведомлены о таких изменениях не менее чем за 7 (семь) дней до их вступления в силу.</p>
+        <p>Продолжение использования услуг после изменения условий считается согласием Пользователя с новой редакцией Соглашения.</p>
+
+        <h3>10. Применимое право</h3>
+        <p>Настоящее Соглашение регулируется законодательством Российской Федерации. Все споры разрешаются в судебном порядке по месту нахождения Студии.</p>
+
+        <h3>11. Контактная информация</h3>
+        <p>По вопросам, связанным с Соглашением, обращайтесь:</p>
+        <ul class="agreement-list">
+          <li><strong>Telegram:</strong> @vikacat05</li>
+          <li><strong>Discord:</strong> mamkis</li>
+          <li><strong>Email:</strong> gorshok.studio@gmail.com</li>
+        </ul>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -1163,6 +1419,19 @@
     let cart = [];
 
     function addToCart(name, price) {
+      // Получаем карточку товара (родитель кнопки)
+      const button = event.target;
+      const card = button.closest('.card');
+
+      // Добавляем эффект выбора
+      card.classList.add('selected');
+
+      // Убираем эффект через 0.6 секунды (длина анимации)
+      setTimeout(() => {
+        card.classList.remove('selected');
+      }, 600);
+
+      // Добавляем товар в корзину
       cart.push({ name, price });
       updateCart();
     }
@@ -1196,4 +1465,3 @@
   </script>
 </body>
 </html>
-
