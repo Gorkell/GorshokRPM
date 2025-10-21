@@ -131,40 +131,6 @@
       background: linear-gradient(135deg, #00f2fe, #4facfe);
     }
 
-    /* Footer */
-    footer {
-      text-align: center;
-      color: #c0c7ff;
-      margin-top: 3rem;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.02);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    footer span {
-      color: #4facfe;
-      font-weight: bold;
-    }
-
-    .contact-link {
-      color: #4facfe;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border: 1px solid #4facfe;
-      border-radius: 8px;
-      margin-top: 1rem;
-    }
-
-    .contact-link:hover {
-      color: #00f2fe;
-      border-color: #00f2fe;
-      transform: translateY(-2px);
-      box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
-    }
-
     /* Навигация */
     nav {
       display: flex;
@@ -341,18 +307,6 @@
     }
 
     /* Контакты */
-    .contacts-section {
-      background: linear-gradient(135deg,
-        rgba(240, 147, 251, 0.1) 0%,
-        rgba(118, 75, 162, 0.05) 50%,
-        rgba(102, 126, 234, 0.03) 100%);
-      border: 2px solid rgba(240, 147, 251, 0.3);
-      border-radius: 20px;
-      padding: 2rem;
-      text-align: center;
-      margin-top: 2rem;
-    }
-
     .contacts-section h3 {
       color: #f0c7ff;
       font-size: 1.6rem;
@@ -509,9 +463,107 @@
       transition: all 0.3s ease;
     }
 
-    .delete-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+    /* Альбом */
+    .album-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .album-item {
+      background: rgba(102, 126, 234, 0.1);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .album-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .album-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .album-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .album-item:hover .album-overlay {
+      opacity: 1;
+    }
+
+    .album-delete-btn {
+      background: rgba(255, 107, 107, 0.8);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .album-delete-btn:hover {
+      background: rgba(255, 107, 107, 1);
+    }
+
+    .upload-section {
+      background: rgba(102, 126, 234, 0.1);
+      border: 2px solid rgba(102, 126, 234, 0.3);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .upload-section h3 {
+      color: #c0c7ff;
+      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+    }
+
+    .upload-section input[type="file"] {
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      border-radius: 8px;
+      color: #c0c7ff;
+    }
+
+    .upload-section button {
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .upload-section button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
     }
 
     /* Кнопка возврата на главную */
@@ -799,7 +851,16 @@
       .welcome-section h3 {
         font-size: 1.2rem;
       }
-    }
+
+      /* Альбом мобильный */
+      .album-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .album-image {
+        height: 150px;
+      }
 
     @media (max-width: 768px) {
       /* Header мобильный */
@@ -902,8 +963,96 @@
       /* Footer mobile */
       footer {
         margin-top: 2rem;
-        padding: 1.5rem 1rem;
+        padding: 1.5rem;
         font-size: 0.9rem;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        box-sizing: border-box;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.3rem;
+      }
+
+      .home-link, .login-btn {
+        padding: 0.7rem;
+        font-size: 0.85rem;
+      }
+
+      .news-filters {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+      }
+
+      .filter-group {
+        width: 100%;
+      }
+
+      .news-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      }
+
+      .delete-btn {
+        align-self: flex-end;
+        margin-top: 0.5rem;
+      }
+
+      .family-description {
+        padding: 0.8rem;
+      }
+
+      .family-description h2 {
+        font-size: 1.5rem;
+      }
+
+      .intro-text,
+      .main-text {
+        font-size: 0.9rem;
+      }
+
+      .values-section,
+      .family-section,
+      .journey-section,
+      .welcome-section {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .values-section h3,
+      .family-section h3,
+      .journey-section h3,
+      .welcome-section h3 {
+        font-size: 1.1rem;
+      }
+
+      .values-section p,
+      .family-section p,
+      .journey-section p {
+        font-size: 0.9rem;
+      }
+
+      .welcome-text {
+        font-size: 1rem !important;
+      }
+
+      .welcome-text strong {
+        font-size: 1.1rem;
+      }
+
+      .home-button {
+        top: 20px;
+        left: 15px;
+      }
+
+      .home-link {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
       }
     }
 
@@ -991,96 +1140,6 @@
       }
 
       /* Footer for very small screens */
-      footer {
-        margin-top: 1.5rem;
-        padding: 0.8rem 0.3rem;
-        font-size: 0.85rem;
-        line-height: 1.4;
-      }
-    }
-
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 1.3rem;
-      }
-
-      .home-link, .login-btn {
-        padding: 0.7rem;
-        font-size: 0.85rem;
-      }
-
-      .news-filters {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: stretch;
-      }
-
-      .filter-group {
-        width: 100%;
-      }
-
-      .news-meta {
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: flex-start;
-      }
-
-      .delete-btn {
-        align-self: flex-end;
-        margin-top: 0.5rem;
-      }
-
-      .family-description {
-        padding: 0.8rem;
-      }
-
-      .family-description h2 {
-        font-size: 1.5rem;
-      }
-
-      .intro-text,
-      .main-text {
-        font-size: 0.9rem;
-      }
-
-      .values-section,
-      .family-section,
-      .journey-section,
-      .welcome-section {
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .values-section h3,
-      .family-section h3,
-      .journey-section h3,
-      .welcome-section h3 {
-        font-size: 1.1rem;
-      }
-
-      .values-section p,
-      .family-section p,
-      .journey-section p {
-        font-size: 0.9rem;
-      }
-
-      .welcome-text {
-        font-size: 1rem !important;
-      }
-
-      .welcome-text strong {
-        font-size: 1.1rem;
-      }
-
-      .home-button {
-        top: 20px;
-        left: 15px;
-      }
-
-      .home-link {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.8rem;
-      }
     }
 
     @media (max-width: 320px) {
@@ -1168,11 +1227,10 @@
         font-size: 0.8rem;
       }
 
-      /* Улучшения для мобильных форм */
       .form-group input {
         padding: 1rem;
         font-size: 1rem;
-        min-height: 48px; /* Минимальная высота для удобного касания */
+        min-height: 48px; 
       }
 
       .submit-btn {
@@ -1247,6 +1305,7 @@
     <a href="#" class="active" onclick="showSection('main', this)">Описание</a>
     <a href="#" onclick="showSection('applications', this)">Заявки</a>
     <a href="#" onclick="showSection('news', this)">Новости</a>
+    <a href="#" onclick="showSection('album', this)">Альбом</a>
   </nav>
 
   <main>
@@ -1374,12 +1433,23 @@
         </div>
       </div>
     </section>
-  </main>
 
-  <footer>
-    За отдельную плату вы можете <span>арендовать страницу на нашем сайте!</span><br><br>
-    <a href="contacts.html" class="contact-link">Связаться с нами</a>
-  </footer>
+    <!-- Раздел альбома -->
+    <section id="album">
+      <h2>Семейный альбом</h2>
+
+      <!-- Галерея изображений -->
+      <div class="album-gallery" id="albumGallery">
+        <!-- Изображения будут загружаться сюда -->
+      </div>
+
+      <!-- Форма загрузки изображений (только для админов) -->
+      <div class="upload-section" id="uploadSection" style="display: none;">
+        <h3>Загрузить изображение</h3>
+        <input type="file" id="imageInput" accept="image/*" multiple>
+        <button onclick="uploadImages()">Загрузить</button>
+      </div>
+    </section>
 
   <!-- Firebase SDK -->
   <script type="module">
@@ -1453,7 +1523,7 @@
       window.userRole = null;
       window.currentUserName = null;
       document.getElementById('adminPanel').style.display = 'none';
-      document.getElementById('deleteControls').style.display = 'none';
+      document.getElementById('uploadSection').style.display = 'none';
 
       // Показываем кнопку Login в header
       const loginBtn = document.querySelector('.header-buttons .login-btn');
@@ -1489,13 +1559,11 @@
             console.log('Восстанавливаю сессию для роли:', session.role);
 
             document.getElementById('adminPanel').style.display = 'block';
-            document.getElementById('login-panel').style.display = 'none';
+            document.getElementById('loginModal').style.display = 'none';
 
-            if (session.role === 'admin') {
-              document.getElementById('deleteControls').style.display = 'block';
-            } else {
-              document.getElementById('deleteControls').style.display = 'none';
-            }
+            // Показываем элементы для админа
+            const uploadSection = document.getElementById('uploadSection');
+            if (uploadSection) uploadSection.style.display = 'block';
 
             // Скрываем кнопку Login в header
             const loginBtn = document.querySelector('.header-buttons .login-btn');
@@ -1513,7 +1581,6 @@
             // Сессия истекла
             console.log('Сессия истекла');
             sessionStorage.removeItem('rein_user_session');
-            document.getElementById('login-panel').style.display = 'block';
           }
         } catch (e) {
           console.error('Ошибка восстановления сессии:', e);
@@ -1550,14 +1617,6 @@
 
         const newsRef = ref(database, `rein-news/${newsId}`);
         console.log('Путь к новости для удаления:', `rein-news/${newsId}`);
-
-        // Проверяем, что элемент существует в DOM
-        const newsElement = document.querySelector(`[onclick="deleteNews('${newsId}')"]`);
-        if (newsElement) {
-          console.log('Элемент новости найден в DOM');
-        } else {
-          console.log('Элемент новости НЕ найден в DOM');
-        }
 
         remove(newsRef)
           .then(() => {
@@ -1688,32 +1747,192 @@
     document.addEventListener('DOMContentLoaded', function() {
       window.loadNews();
       window.restoreSession();
+      window.loadAlbum();
     });
+
+    // Функции для альбома
+    window.loadAlbum = function() {
+      // Показываем форму загрузки только админам
+      if (window.userRole === 'admin') {
+        const uploadSection = document.getElementById('uploadSection');
+        if (uploadSection) {
+          uploadSection.style.display = 'block';
+        }
+      }
+
+      // Загружаем существующие изображения из Firebase
+      const albumRef = ref(database, 'rein-album');
+      onValue(albumRef, (snapshot) => {
+        const albumGallery = document.getElementById('albumGallery');
+        if (albumGallery) {
+          albumGallery.innerHTML = '';
+
+          if (snapshot.exists()) {
+            const images = snapshot.val();
+            Object.entries(images).forEach(([id, data]) => {
+              const albumItem = document.createElement('div');
+              albumItem.className = 'album-item';
+
+              // Создаем содержимое в зависимости от роли пользователя
+              let deleteButton = '';
+              if (window.userRole === 'admin') {
+                deleteButton = `<div class="album-overlay">
+                  <button class="album-delete-btn" onclick="deleteImage('${id}')">Удалить</button>
+                </div>`;
+              }
+
+              albumItem.innerHTML = `
+                <img src="${data.url}" alt="${data.name}" class="album-image" onclick="openImage('${data.url}')">
+                ${deleteButton}
+              `;
+              albumGallery.appendChild(albumItem);
+            });
+          } else {
+            albumGallery.innerHTML = '<p style="color: #c0c7ff; text-align: center;">Альбом пока пуст</p>';
+          }
+        }
+      });
+    }
+
+    window.uploadImages = function() {
+      console.log('uploadImages вызвана');
+      console.log('Текущая роль пользователя:', window.userRole);
+
+      // Настройки Cloudinary
+      const CLOUD_NAME = "dtp1gb6sv";
+      const UPLOAD_PRESET = "dtp1gb6sv";
+
+      if (window.userRole !== 'admin') {
+        alert('Доступ запрещен! Только администраторы могут загружать изображения.');
+        return;
+      }
+
+      const files = document.getElementById('imageInput').files;
+      console.log('Выбранные файлы:', files);
+
+      if (files.length === 0) {
+        alert('Выберите изображения для загрузки!');
+        return;
+      }
+
+      console.log(`Начинаем загрузку ${files.length} файлов`);
+
+      Array.from(files).forEach((file, index) => {
+        console.log(`Загружаем файл ${index + 1}:`, file.name, file.size, file.type);
+
+        if (file.size > 10 * 1024 * 1024) { // 10MB лимит
+          alert(`Файл "${file.name}" слишком большой. Максимальный размер: 10MB`);
+          return;
+        }
+
+        if (!file.type.startsWith('image/')) {
+          alert(`Файл "${file.name}" не является изображением`);
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', UPLOAD_PRESET);
+
+        console.log('Отправляем запрос в Cloudinary...');
+
+        fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          console.log('Получен ответ от Cloudinary:', response.status, response.statusText);
+
+          if (!response.ok) {
+            return response.text().then(text => {
+              console.error('Ошибка ответа Cloudinary:', text);
+              throw new Error(`HTTP error! status: ${response.status}, message: ${text}`);
+            });
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Данные от Cloudinary:', data);
+
+          if (data.secure_url) {
+            console.log('Получена ссылка на изображение:', data.secure_url);
+
+            // Сохраняем ссылку в Firebase
+            const albumRef = ref(database, 'rein-album');
+            const newImageRef = push(albumRef);
+            set(newImageRef, {
+              url: data.secure_url,
+              name: file.name,
+              timestamp: Date.now(),
+              size: file.size,
+              type: file.type
+            })
+            .then(() => {
+              console.log('Изображение успешно сохранено в Firebase');
+              alert(`Изображение "${file.name}" успешно загружено!`);
+            })
+            .catch(error => {
+              console.error('Ошибка сохранения в Firebase:', error);
+              alert(`Ошибка при сохранении изображения в базу данных: ${error.message}`);
+            });
+          } else {
+            console.error('Cloudinary не вернул secure_url:', data);
+            alert(`Ошибка загрузки: сервер не вернул ссылку на изображение. Ответ сервера: ${JSON.stringify(data)}`);
+          }
+        })
+        .catch(error => {
+          console.error(`Ошибка при загрузке изображения "${file.name}":`, error);
+          alert(`Ошибка при загрузке изображения "${file.name}": ${error.message}`);
+        });
+      });
+
+      // Очищаем input
+      document.getElementById('imageInput').value = '';
+      console.log('Input очищен');
+    }
+
+    window.deleteImage = function(imageId) {
+      if (window.userRole !== 'admin') {
+        alert('Доступ запрещен! Только администраторы могут удалять изображения.');
+        return;
+      }
+
+      if (confirm('Вы уверены, что хотите удалить это изображение?')) {
+        const imageRef = ref(database, `rein-album/${imageId}`);
+        remove(imageRef)
+          .then(() => {
+            alert('Изображение удалено!');
+          })
+          .catch((error) => {
+            console.error('Ошибка удаления:', error);
+            alert('Ошибка при удалении изображения');
+          });
+      }
+    }
+
+    window.openImage = function(imageUrl) {
+      window.open(imageUrl, '_blank');
+    }
   </script>
 
-  <!-- Глобальные функции для навигации и логина -->
+  <!-- Глобальные функции для onclick событий в HTML -->
   <script>
     // Функции для работы с разделами
     function showSection(id, el) {
       console.log('showSection вызвана с id:', id);
-      console.log('Элемент:', el);
 
       const sections = document.querySelectorAll('section');
       const targetSection = document.getElementById(id);
       const navLinks = document.querySelectorAll('nav a');
-
-      console.log('Найдено секций:', sections.length);
-      console.log('Целевая секция:', targetSection);
-      console.log('Навигационные ссылки:', navLinks.length);
 
       if (!targetSection) {
         console.error('Секция с id "' + id + '" не найдена!');
         return;
       }
 
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      sections.forEach(sec => sec.classList.remove('active'));
+      targetSection.classList.add('active');
+      navLinks.forEach(a => a.classList.remove('active'));
       el.classList.add('active');
 
       console.log('Секция переключена на:', id);
@@ -1737,16 +1956,17 @@
       if (password === 'RGorkell') {
         window.userRole = 'admin';
         window.currentUserName = userName || 'Администратор';
+
         document.getElementById('loginModal').style.display = 'none';
         document.getElementById('adminPanel').style.display = 'block';
-        document.getElementById('deleteControls').style.display = 'block';
-        document.getElementById('login-panel').style.display = 'none';
+
+        // Показываем элементы для админа
+        const uploadSection = document.getElementById('uploadSection');
+        if (uploadSection) uploadSection.style.display = 'block';
 
         // Скрываем кнопку Login в header
         const loginBtn = document.querySelector('.header-buttons .login-btn');
-        if (loginBtn) {
-          loginBtn.style.display = 'none';
-        }
+        if (loginBtn) loginBtn.style.display = 'none';
 
         document.getElementById('adminPassword').value = '';
 
@@ -1761,16 +1981,17 @@
       } else if (password === 'RFam') {
         window.userRole = 'moderator';
         window.currentUserName = userName || 'Модератор';
+
         document.getElementById('loginModal').style.display = 'none';
         document.getElementById('adminPanel').style.display = 'block';
-        document.getElementById('deleteControls').style.display = 'none';
-        document.getElementById('login-panel').style.display = 'none';
+
+        // Скрываем элементы для модератора
+        const uploadSection = document.getElementById('uploadSection');
+        if (uploadSection) uploadSection.style.display = 'none';
 
         // Скрываем кнопку Login в header
         const loginBtn = document.querySelector('.header-buttons .login-btn');
-        if (loginBtn) {
-          loginBtn.style.display = 'none';
-        }
+        if (loginBtn) loginBtn.style.display = 'none';
 
         document.getElementById('adminPassword').value = '';
 
@@ -1780,7 +2001,6 @@
           name: window.currentUserName,
           timestamp: Date.now()
         }));
-
         alert('Успешный вход в панель модератора!');
       } else {
         alert('Неверный пароль!');
@@ -1791,33 +2011,13 @@
     // Обработка формы заявок
     document.getElementById('applicationForm').addEventListener('submit', function(e) {
       e.preventDefault();
-
       const firstName = document.getElementById('firstName').value;
       const lastName = document.getElementById('lastName').value;
       const nickname = document.getElementById('nickname').value;
 
       if (firstName && lastName && nickname) {
-        // Показываем юмористическое сообщение вместо реальной отправки
         alert('Эта кнопка тут по рофлу и ничего не делает, прочитай то что написано ниже :)');
-
-        // Не очищаем форму, чтобы пользователь мог прочитать инструкции
       }
-    });
-
-    // Ждем загрузки DOM и затем инициализируем
-    document.addEventListener('DOMContentLoaded', function() {
-      // Даем небольшую задержку для полной загрузки
-      setTimeout(function() {
-        // Проверяем, что элементы существуют
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('nav a');
-
-        if (sections.length > 0 && navLinks.length > 0) {
-          console.log('Элементы загружены успешно');
-        } else {
-          console.error('Элементы не найдены');
-        }
-      }, 100);
     });
 
     // Закрытие модальных окон при клике вне их
@@ -1828,5 +2028,4 @@
       }
     });
   </script>
-</body>
 </html>
